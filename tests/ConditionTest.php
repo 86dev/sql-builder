@@ -186,18 +186,18 @@ class ConditionTest extends TestCase
 
 	public function testPrepareValueBit()
 	{
-		$this->assertEquals("b'1'", Condition::prepare_value(true));
-		$this->assertEquals("b'1'", Condition::prepare_value(1, ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value(215, ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('true', ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('on', ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('yes', ConditionType::BIT));
+		$this->assertEquals("b'1'", Condition::prepare_value(true, ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value(1, ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value(215, ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value('true', ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value('on', ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value('yes', ConditionType::BOOL));
 
 		$this->assertEquals("b'0'", Condition::prepare_value(false));
-		$this->assertEquals("b'0'", Condition::prepare_value(0, ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('false', ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('off', ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('no', ConditionType::BIT));
+		$this->assertEquals("b'0'", Condition::prepare_value(0, ConditionType::BOOL));
+		$this->assertEquals("b'0'", Condition::prepare_value('false', ConditionType::BOOL));
+		$this->assertEquals("b'0'", Condition::prepare_value('off', ConditionType::BOOL));
+		$this->assertEquals("b'0'", Condition::prepare_value('no', ConditionType::BOOL));
 	}
 
 	public function testPrepareValueDouble()
