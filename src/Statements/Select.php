@@ -14,44 +14,6 @@ class Select extends Query
 	use Traits\JoinsTrait;
 
 	#region Constants
-	const TYPE_STRING = '\string';
-	const TYPE_DATE = 'date';
-	const TYPE_DATETIME = 'datetime';
-	const TYPE_TIME = 'time';
-	const TYPE_INT = 'int';
-	const TYPE_INTEGER = 'integer';
-	const TYPE_FLOAT = 'float';
-	const TYPE_DOUBLE = 'double';
-	const TYPE_BOOL = 'bool';
-	const TYPE_LONG = 'long';
-
-	const OP_EQ = '=';
-	const OP_NEQ = '!=';
-	const OP_GT = '>';
-	const OP_LT = '<';
-	const OP_LTE = '<=';
-	const OP_GTE = '>=';
-	const OP_IN = 'IN';
-	const OP_NOTIN = 'NOT IN';
-	const OP_BETWEEN = 'BETWEEN';
-	const OP_NOTBETWEEN = 'NOT BETWEEN';
-	const OP_LIKE = 'LIKE';
-	const OP_NOTLIKE = 'NOT LIKE';
-	const OP_NULL = 'IS NULL';
-	const OP_NOTNULL = 'IS NOT NULL';
-
-	const REL_AND = 'AND';
-	const REL_OR = 'OR';
-	const RELS = [self::REL_AND, self::REL_OR];
-
-	const JOIN_LEFT = 'LEFT JOIN';
-	const JOIN_RIGHT = 'RIGHT JOIN';
-	const JOIN_INNER = 'INNER JOIN';
-	const JOIN_CROSS = 'CROSS JOIN';
-	const JOIN_FULL = 'FULL JOIN';
-	const JOIN_NATURAL = 'NATURAL JOIN';
-	const JOINS = [self::JOIN_CROSS, self::JOIN_FULL, self::JOIN_INNER, self::JOIN_LEFT, self::JOIN_NATURAL, self::JOIN_RIGHT];
-
 	const ORDER_ASC = 'ASC';
 	const ORDER_DESC = 'DESC';
 	const ORDERS = [self::ORDER_ASC, self::ORDER_DESC];
@@ -73,11 +35,6 @@ class Select extends Query
 	 * @var \string[]
 	 */
 	protected $_from = [];
-	/**
-	 * Joins
-	 * @var Join[]
-	 */
-	protected $_joins = [];
 	/**
 	 * Where
 	 * @var Conditions
