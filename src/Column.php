@@ -79,16 +79,6 @@ class Column extends Statements\Query
 	 */
 	protected $_default_validator;
 	/**
-	 * Column charset, used by CHAR, VARCHAR, *TEXT, ENUM and SET
-	 * @var \string
-	 */
-	protected $_charset;
-	/**
-	 * Column collation, used by CHAR, VARCHAR, *TEXT, ENUM and SET
-	 * @var mixed
-	 */
-	protected $_collate;
-	/**
 	 * Column values, used by ENUM and SET
 	 * @var mixed
 	 */
