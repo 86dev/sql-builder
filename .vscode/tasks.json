@@ -6,7 +6,8 @@
 		{
 			"label": "Update composer",
 			"type": "shell",
-			"command": "composer update"
+			"command": "composer update",
+			"problemMatcher": []
 		},
 		{
 			"label": "All tests",
