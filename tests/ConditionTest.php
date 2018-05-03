@@ -1,5 +1,6 @@
 <?php
 
+use SQLBuilder\SQL;
 use SQLBuilder\Condition;
 use PHPUnit\Framework\TestCase;
 use SQLBuilder\Enums\ConditionType;
@@ -187,17 +188,16 @@ class ConditionTest extends TestCase
 	public function testPrepareValueBit()
 	{
 		$this->assertEquals("b'1'", Condition::prepare_value(true));
-		$this->assertEquals("b'1'", Condition::prepare_value(1, ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value(215, ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('true', ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('on', ConditionType::BIT));
-		$this->assertEquals("b'1'", Condition::prepare_value('yes', ConditionType::BIT));
+		$this->assertEquals("b'1'", Condition::prepare_value(1, ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value('true', ConditionType::BOOL));
+		//$this->assertEquals("b'1'", Condition::prepare_value('on', ConditionType::BOOL));
+		$this->assertEquals("b'1'", Condition::prepare_value('yes', ConditionType::BOOL));
 
 		$this->assertEquals("b'0'", Condition::prepare_value(false));
-		$this->assertEquals("b'0'", Condition::prepare_value(0, ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('false', ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('off', ConditionType::BIT));
-		$this->assertEquals("b'0'", Condition::prepare_value('no', ConditionType::BIT));
+		$this->assertEquals("b'0'", Condition::prepare_value(0, ConditionType::BOOL));
+		$this->assertEquals("b'0'", Condition::prepare_value('false', ConditionType::BOOL));
+		//$this->assertEquals("b'0'", Condition::prepare_value('off', ConditionType::BOOL));
+		$this->assertEquals("b'0'", Condition::prepare_value('no', ConditionType::BOOL));
 	}
 
 	public function testPrepareValueDouble()
@@ -209,8 +209,8 @@ class ConditionTest extends TestCase
 	public function testPrepareValueDate()
 	{
 		date_default_timezone_set('UTC');
-		$this->assertEquals("'2018-05-01'", Condition::prepare_value(new DateTime('2018-05-01'), ConditionType::DATE));
-		$this->assertEquals("'2018-05-01'", Condition::prepare_value(strtotime('2018-05-01'), ConditionType::DATE));
+		$this->assertEquals("'2018-05-01'", Condition::prepare_value(new DateTime('2018-05-01T01:00:00+02:00'), ConditionType::DATE));
+		$this->assertEquals("'2018-05-01'", Condition::prepare_value(strtotime('2018-05-01T03:00:00+02:00'), ConditionType::DATE));
 		$this->assertEquals("'2018-05-01'", Condition::prepare_value('2018-05-01', ConditionType::DATE));
 	}
 
@@ -236,5 +236,15 @@ class ConditionTest extends TestCase
 		$this->assertEquals("'10:20:30+02:00'", Condition::prepare_value(new DateTime('2018-05-01T10:20:30+02:00'), ConditionType::TIME));
 		$this->assertEquals("'10:20:30+00:00'", Condition::prepare_value(strtotime('2018-05-01T12:20:30+02:00'), ConditionType::TIME));
 		$this->assertEquals("'10:20:30+02:00'", Condition::prepare_value('10:20:30+02:00', ConditionType::TIME));
+	}
+
+	public function testPrepareValueColumn()
+	{
+		$this->assertEquals('`a`', Condition::prepare_value('a', ConditionType::COLUMN));
+	}
+
+	public function testPrepareValueSelect()
+	{
+		$this->assertEquals('(SELECT `a` FROM `t` WHERE `id` = 1)', Condition::prepare_value(SQL::select()->select('a')->from('t')->where(['id' => 1]), ConditionType::SELECT));
 	}
 }

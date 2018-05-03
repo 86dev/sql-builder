@@ -237,11 +237,14 @@ abstract class Condition
 				$type = '%s';
 				break;
 			case ConditionType::SELECT:
+				$value = $value->parse_query();
 				$type = '(%s)';
 				break;
 			case ConditionType::BOOL:
 			case ConditionType::BOOLEAN:
 				$value = \PHPTools\BoolHelper::to_bool($value) ? "b'1'" : "b'0'";
+				$type = '%s';
+				break;
 			case ConditionType::INT:
 			case ConditionType::INTEGER:
 			case ConditionType::LONG:

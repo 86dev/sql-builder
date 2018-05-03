@@ -13,6 +13,7 @@ class DeleteTest extends TestCase
 			SQL::delete()->from('users')->where(Condition::eq('id', 1))->parse_query()
 		);
 	}
+	
 	public function testDeleteUsing()
 	{
 		$this->assertEquals("DELETE FROM `u` USING `users` AS `u` INNER JOIN `users_roles` AS `ur` ON `ur`.`user_id` = `u`.`id` WHERE `ur`.`role_id` = 1",

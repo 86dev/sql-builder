@@ -12,6 +12,7 @@ class UpdateTest extends TestCase
 			SQL::update()->table('users')->set('name', 'a')->where(Condition::eq('id', 1))->parse_query()
 		);
 	}
+	
 	public function testUpdateSetMany()
 	{
 		$this->assertEquals("UPDATE `users` SET `name` = 'a', `type` = 0 WHERE `id` = 1",
