@@ -62,7 +62,7 @@ class Index extends Statements\Query
 
 	public function fields(...$fields)
 	{
-		$this->set_fields(...$fields);
+		$this->set_fields($fields);
 		return $this;
 	}
 
