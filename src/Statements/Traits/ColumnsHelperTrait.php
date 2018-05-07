@@ -12,6 +12,17 @@ use SQLBuilder\Column;
 trait ColumnsHelperTrait
 {
 	/**
+	 * Configure an ID column as `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+	 * @return Column
+	 */
+	public function id()
+	{
+		$column = $this->int('id')->unsigned()->auto_increment()->primary();
+		$this->add_column($column);
+		return $column;
+	}
+
+	/**
 	 * Configure an INT column (-2,147,483,648 to 2,147,483,647; unsigned 0 to 4,294,967,295)
 	 * @param \string $name Column name
 	 * @return Column
