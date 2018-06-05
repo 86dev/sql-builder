@@ -13,6 +13,7 @@ trait ColumnsHelperTrait
 {
 	/**
 	 * Configure an ID column as `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+	 * Equivalent to $this->int('id')->unsigned()->auto_increment()->primary();
 	 * @return Column
 	 */
 	public function id()
