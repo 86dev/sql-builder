@@ -58,7 +58,7 @@ class CreateTable extends Query
 	 * @param Query $index
 	 * @return CreateTable
 	 */
-	protected function add_index(Query $index)
+	public function add_index(Query $index)
 	{
 		$index->action(null);
 		$index->table($this->_name);
