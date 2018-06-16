@@ -22,52 +22,70 @@ class Select extends Query
 	#region Variables
 	/**
 	 * Select
+	 *
 	 * @var Fields
 	 */
 	protected $_select;
+
 	/**
 	 * Distinct
+	 *
 	 * @var \bool
 	 */
 	protected $_distinct;
+
 	/**
 	 * From
+	 *
 	 * @var \string[]
 	 */
 	protected $_from = [];
+
 	/**
 	 * Where
+	 *
 	 * @var Conditions
 	 */
 	protected $_where;
+
 	/**
 	 * Group by
+	 *
 	 * @var Fields
 	 */
 	protected $_groupby;
+
 	/**
 	 * Having
+	 *
 	 * @var Conditions
 	 */
 	protected $_having;
+
 	/**
 	 * Order by ['field' => 'ASC|DESC']
+	 *
 	 * @var \string[]
 	 */
 	protected $_orderby = [];
+
 	/**
 	 * Limit
+	 *
 	 * @var \int|null
 	 */
 	protected $_limit = '';
+
 	/**
 	 * Offset
+	 *
 	 * @var \int|null
 	 */
 	protected $_offset = null;
 
 	/**
 	 * SQL result
+	 *
 	 * @var \string
 	 */
 	public $sql = '';
@@ -76,6 +94,7 @@ class Select extends Query
 
 	/**
 	 * Add a join
+	 *
 	 * @param \SQLBuilder\Join $join
 	 */
 	public function join($join)
@@ -86,6 +105,7 @@ class Select extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return Select
 	 */
 	public function new_query()
@@ -105,6 +125,7 @@ class Select extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return \string
 	 */
 	public function parse_query()
@@ -151,6 +172,7 @@ class Select extends Query
 
 	/**
 	 * Add a field to the query SELECT clause
+	 *
 	 * @param \string $field The field name
 	 * @param \string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
 	 * @param \string $alias The field alias
@@ -167,6 +189,7 @@ class Select extends Query
 
 	/**
 	 * Add a table to the query FROM clause
+	 *
 	 * @param \string $table The table name
 	 * @param \string $alias The table alias
 	 * @return Select
@@ -182,6 +205,7 @@ class Select extends Query
 
 	/**
 	 * Add conditions to the query WHERE clause
+	 *
 	 * @param \string|\string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
 	 * @return Select
 	 */
@@ -193,6 +217,7 @@ class Select extends Query
 
 	/**
 	 * Add field to the query GROUP BY clause
+	 *
 	 * @param \string $field The field name
 	 * @param \string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
 	 * @return Select
@@ -205,6 +230,7 @@ class Select extends Query
 
 	/**
 	 * Add conditions to the query HAVING clause
+	 *
 	 * @param \string|\string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
 	 * @return Select
 	 */
@@ -216,6 +242,7 @@ class Select extends Query
 
 	/**
 	 * Add field to the query ORDER BY clause
+	 *
 	 * @param \string $field The field name or alias (must be consistent with fields added in Select::select)
 	 * @param \string $order Select::ORDER_ASC or Select::ORDER_DESC
 	 * @return Select
@@ -230,6 +257,7 @@ class Select extends Query
 
 	/**
 	 * Set the query LIMIT clause
+	 *
 	 * @param \int|null $limit The number of items to include
 	 * @return Select
 	 */
@@ -241,6 +269,7 @@ class Select extends Query
 
 	/**
 	 * Set the query OFFSET clause
+	 *
 	 * @param \int|null $offset The number of items to ignore
 	 * @return Select
 	 */
@@ -250,6 +279,11 @@ class Select extends Query
 		return $this;
 	}
 
+	/**
+	 * Create a new SELECT query
+	 *
+	 * @return Select
+	 */
 	public static function create()
 	{
 		return new static();

@@ -13,12 +13,14 @@ trait AlgorithmTrait
 {
 	/**
 	 * Index algorithm
+	 *
 	 * @var \string
 	 */
 	protected $_algorithm;
 
 	/**
 	 * Get index algorithm
+	 *
 	 * @return \string
 	 */
 	public function get_algorithm()
@@ -28,12 +30,7 @@ trait AlgorithmTrait
 
 	/**
 	 * Set index algorithm, see IndexAlgorithm for available values
-	 * @param \string $algorithm
-	 */
-	public abstract function algorithm($algorithm);
-
-	/**
-	 * Set index algorithm, see IndexAlgorithm for available values
+	 *
 	 * @param \string $algorithm
 	 */
 	protected function set_algorithm($algorithm)
@@ -41,14 +38,23 @@ trait AlgorithmTrait
 		if (!empty($algorithm) && !IndexAlgorithm::isValidValue($algorithm))
 			throw new \UnexpectedValueException("Index {$this->_default_name()}: invalid algorithm ('$algorithm'). Expected values are ".implode(', ', array_map([$this, '_quote'], IndexAlgorithm::values()))." or empty.");
 		$this->_algorithm = $algorithm;
-		return $this;
 	}
 
+	/**
+	 * Reset algorithm query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_algorithm()
 	{
 		$this->_algorithm = null;
 	}
 
+	/**
+	 * Get algorithm query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_algorithm()
 	{
 		return $this->_algorithm ? "ALGORITHM = $this->_algorithm" : '';

@@ -50,19 +50,36 @@ class Join extends Statements\Query
 	#endregion
 
 	#region Setters
-
+	/**
+	 * Join table name
+	 *
+	 * @param string $table
+	 * @return Join
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Join tbale alias
+	 *
+	 * @param string $alias
+	 * @return Join
+	 */
 	public function alias($alias)
 	{
 		$this->set_alias($alias);
 		return $this;
 	}
 
+	/**
+	 * Join table conditions
+	 *
+	 * @param string[] $conditions
+	 * @return Join
+	 */
 	public function on($conditions)
 	{
 		$this->set_conditions($conditions);
@@ -71,6 +88,8 @@ class Join extends Statements\Query
 
 	/**
 	 * Set join direction to left
+	 *
+	 * @return Join
 	 */
 	public function left()
 	{
@@ -80,6 +99,8 @@ class Join extends Statements\Query
 
 	/**
 	 * Set join direction to right
+	 *
+	 * @return Join
 	 */
 	public function right()
 	{
@@ -89,6 +110,8 @@ class Join extends Statements\Query
 
 	/**
 	 * Set join type to inner
+	 *
+	 * @return Join
 	 */
 	public function inner()
 	{
@@ -99,6 +122,8 @@ class Join extends Statements\Query
 
 	/**
 	 * Set join type to outer
+	 *
+	 * @return Join
 	 */
 	public function outer()
 	{
@@ -108,26 +133,61 @@ class Join extends Statements\Query
 	#endregion
 
 	#region Helpers
+	/**
+	 * Create a new LEFT INNER JOIN
+	 *
+	 * @param string $table
+	 * @param string $alias
+	 * @return Join
+	 */
 	public static function left_inner_join($table = null, $alias = null)
 	{
 		return (new Join($table, $alias))->left()->inner();
 	}
 
+	/**
+	 * Create a new LEFT OUTER JOIN
+	 *
+	 * @param string $table
+	 * @param string $alias
+	 * @return Join
+	 */
 	public static function left_outer_join($table = null, $alias = null)
 	{
 		return (new Join($table, $alias))->left()->outer();
 	}
 
+	/**
+	 * Create a new INNER JOIN
+	 *
+	 * @param string $table
+	 * @param string $alias
+	 * @return Join
+	 */
 	public static function inner_join($table = null, $alias = null)
 	{
 		return (new Join($table, $alias))->inner();
 	}
 
+	/**
+	 * Create a new RIGHT INNER JOIN
+	 *
+	 * @param string $table
+	 * @param string $alias
+	 * @return Join
+	 */
 	public static function right_inner_join($table = null, $alias = null)
 	{
 		return (new Join($table, $alias))->right()->inner();
 	}
 
+	/**
+	 * Create a new RIGHT OUTER JOIN
+	 *
+	 * @param string $table
+	 * @param string $alias
+	 * @return Join
+	 */
 	public static function right_outer_join($table = null, $alias = null)
 	{
 		return (new Join($table, $alias))->right()->outer();
@@ -148,7 +208,7 @@ class Join extends Statements\Query
 
 	/**
 	 * Reset the query
-	 * @return Index
+	 * @return Join
 	 */
 	public function new_query()
 	{

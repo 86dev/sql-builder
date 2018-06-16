@@ -18,6 +18,7 @@ class RenameTable extends Query
 	#region Getters
 	/**
 	 * Get table name(s)
+	 *
 	 * @return \string|\string[]
 	 */
 	public function get_name()
@@ -27,6 +28,7 @@ class RenameTable extends Query
 
 	/**
 	 * Get new table name(s)
+	 *
 	 * @return \string|\string[]
 	 */
 	public function get_new_name()
@@ -38,7 +40,8 @@ class RenameTable extends Query
 	#region Setters
 	/**
 	 * Set table name(s)
-	 * @param \string|\string[] $name Original table name or names
+	 *
+	 * @param \string|\string[] $name Original table(s) name(s)
 	 * @return RenameTable
 	 */
 	public function name($name)
@@ -49,7 +52,8 @@ class RenameTable extends Query
 
 	/**
 	 * Set new table name(s)
-	 * @param \string|\string[] $name New table name or names
+	 *
+	 * @param \string|\string[] $name New table(s) name(s)
 	 * @return RenameTable
 	 */
 	public function new_name($new_name)
@@ -67,6 +71,7 @@ class RenameTable extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return RenameTable
 	 */
 	public function new_query()
@@ -78,6 +83,7 @@ class RenameTable extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -96,8 +102,15 @@ class RenameTable extends Query
 		return "RENAME TABLE ".implode(', '.$nlt, array_map(function($name, $new_name) { return $this->_backtick($name).' TO '.$this->_backtick($new_name); }, $names, $new_names));
 	}
 
-	public static function create()
+	/**
+	 * Create a new RENAME TABLE query
+	 *
+	 * @param string|string[] $name Original table(s) name(s)
+	 * @param string|string[] $new_name New table(s) name(s)
+	 * @return RenameTable
+	 */
+	public static function create($name = null, $new_name = null)
 	{
-		return new static();
+		return (new static())->name($name)->new_name($new_name);
 	}
 }

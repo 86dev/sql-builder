@@ -22,18 +22,21 @@ abstract class Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return Query
 	 */
 	public abstract function new_query();
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return \string
 	 */
 	public abstract function parse_query();
 
 	/**
 	 * Surround a name with bactick. Shortcut function to SQLHelper::backtick
+	 *
 	 * @param \string $name
 	 * @return \string
 	 */
@@ -44,6 +47,7 @@ abstract class Query
 
 	/**
 	 * Surround a value with quote. Shortcut function to SQLHelper::quote
+	 *
 	 * @param \string $value
 	 * @return \string
 	 */
@@ -54,6 +58,7 @@ abstract class Query
 
 	/**
 	 * Indicates if the SQL returned should be prettified
+	 *
 	 * @param \bool $prettify
 	 * @return static
 	 */

@@ -19,12 +19,14 @@ trait ActionTrait
 
 	/**
 	 * Indicates if an empty action is allowed
+	 *
 	 * @var \bool
 	 */
 	protected $_allow_empty_action = true;
 
 	/**
 	 * Get action
+	 *
 	 * @return \string
 	 */
 	public function get_action()
@@ -34,31 +36,43 @@ trait ActionTrait
 
 	/**
 	 * Set action
+	 *
 	 * @param \string $action
-	 */
-	public abstract function action($action);
-
-	/**
-	 * Set action
-	 * @param \string $action
+	 * @throws \UnexpectedValueException
 	 */
 	protected function set_action($action)
 	{
 		$this->check_action($action);
 		$this->_action = $action;
-		return $this;
 	}
 
+	/**
+	 * Reset action query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_action()
 	{
 		$this->_action = null;
 	}
 
+	/**
+	 * Get action query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_action()
 	{
 		return $this->_action ?: '';
 	}
 
+	/**
+	 * Check if action value is valid
+	 *
+	 * @param string $action
+	 * @throws \UnexpectedValueException
+	 * @return bool
+	 */
 	protected function check_action($action)
 	{
 		if((!empty($action) || !$this->_allow_empty_action) && !SQLAction::isValidValue($action))

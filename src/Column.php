@@ -28,58 +28,80 @@ class Column extends Statements\Query
 	 * @var \string
 	 */
 	protected $_type;
+
 	/**
 	 * Column length, used by BIT, *INT, REAL, DOUBLE, FLOAT, DECIMAL, NUMERIC, DATETIME, TIME, TIMESTAMP, CHAR, VARCHAR, BINARY, VARBINARY, BLOB and TEXT
+	 *
 	 * @var \int|null
 	 */
 	protected $_length;
+
 	/**
 	 * Column precision, used by REAL, FLOAT, DOUBLE, DECIMAL and NUMERIC
+	 *
 	 * @var \int|null
 	 */
 	protected $_precision;
+
 	/**
 	 * Indicates if the column is auto incremented
+	 *
 	 * @var \bool
 	 */
 	protected $_auto_increment;
+
 	/**
 	 * Indicates if the column is used has primary key
+	 *
 	 * @var \bool
 	 */
 	protected $_primary;
+
 	/**
 	 * Indicates if the column is unsigned, used by *INT, REAL, DOUBLE, FLOAT, DECIMAL and NUMERIC
+	 *
 	 * @var \bool
 	 */
 	protected $_unsigned;
+
 	/**
 	 * Indicates if the column is left padded with 0 instead of spaces, used by *INT, REAL, DOUBLE, FLOAT, DECIMAL and NUMERIC
+	 *
 	 * @var \bool
 	 */
 	protected $_zerofill;
+
 	/**
 	 * Indicates if the column accepts null value
+	 *
 	 * @var \bool
 	 */
 	protected $_nullable;
+
 	/**
 	 * Column default value
+	 *
 	 * @var mixed
 	 */
 	protected $_default;
+
 	/**
 	 * Indicates if the default value should be quoted
+	 *
 	 * @var \bool
 	 */
 	protected $_default_quoted;
+
 	/**
 	 * Column default value validator, must be a regex \string
+	 *
 	 * @var \string
 	 */
 	protected $_default_validator;
+
 	/**
 	 * Column values, used by ENUM and SET
+	 *
 	 * @var mixed
 	 */
 	protected $_values;
@@ -91,6 +113,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Constructor that allows configuring column name and type
+	 *
 	 * @param \string $name Column name
 	 * @param \string $type Column type
 	 */
@@ -204,6 +227,11 @@ class Column extends Statements\Query
 			.$before);
 	}
 
+	/**
+	 * Get default name
+	 *
+	 * @return void
+	 */
 	protected function _default_name()
 	{
 		return $this->_name;
@@ -212,6 +240,7 @@ class Column extends Statements\Query
 	#region Setters
 	/**
 	 * Column name
+	 *
 	 * @param \string $name
 	 * @return Column
 	 */
@@ -223,6 +252,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column comment
+	 *
 	 * @param \string $comment
 	 * @return Column
 	 */
@@ -234,6 +264,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column new name
+	 *
 	 * @param \string $new_name
 	 * @return Column
 	 */
@@ -245,6 +276,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column type
+	 *
 	 * @param \string $type
 	 * @return Column
 	 */
@@ -256,7 +288,9 @@ class Column extends Statements\Query
 
 	/**
 	 * Column action, see Column::ACTIONS for available values
+	 *
 	 * @var \string
+	 * @return Column
 	 */
 	public function action($action)
 	{
@@ -266,6 +300,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column length, used by BIT, *INT, REAL, DOUBLE, FLOAT, DECIMAL, NUMERIC, DATETIME, TIME, TIMESTAMP, CHAR, VARCHAR, BINARY, VARBINARY, BLOB and TEXT
+	 *
 	 * @param \int|null $length
 	 * @return Column
 	 */
@@ -277,6 +312,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column precision, used by REAL, FLOAT, DOUBLE, DECIMAL and NUMERIC
+	 *
 	 * @param \int|null $precision
 	 * @return Column
 	 */
@@ -288,6 +324,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column is auto incremented
+	 *
 	 * @param \bool $auto_increment
 	 * @return Column
 	 */
@@ -299,6 +336,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column has a unique index
+	 *
 	 * @param \bool $unique
 	 * @return Column
 	 */
@@ -310,6 +348,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column is used has primary key
+	 *
 	 * @param \bool $primary
 	 * @return Column
 	 */
@@ -321,6 +360,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column is unsigned, used by *INT, REAL, DOUBLE, FLOAT, DECIMAL and NUMERIC
+	 *
 	 * @param \bool $unsigned
 	 * @return Column
 	 */
@@ -332,6 +372,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column is left padded with 0 instead of spaces, used by *INT, REAL, DOUBLE, FLOAT, DECIMAL and NUMERIC
+	 *
 	 * @param \bool $zerofill
 	 * @return Column
 	 */
@@ -343,6 +384,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the column accepts null value
+	 *
 	 * @param \bool $nullable
 	 * @return Column
 	 */
@@ -354,6 +396,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column default value
+	 *
 	 * @param \string $default
 	 * @return Column
 	 */
@@ -365,6 +408,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column default value set to CURRENT_TIMESTAMP. Will only work for DATETIME and TIMESTAMP columns.
+	 *
 	 * @param \bool $also_on_update Determine if an UPDATE on the row will also update the field with CURRENT_TIMESTAMP
 	 * @return Column
 	 */
@@ -380,6 +424,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Indicates if the default value should be quoted
+	 *
 	 * @param \bool $default_quoted
 	 * @return Column
 	 */
@@ -391,6 +436,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column default value validator, must be a regex \string
+	 *
 	 * @param \string $default_validator
 	 * @return Column
 	 */
@@ -402,6 +448,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column charset, used by CHAR, VARCHAR, *TEXT, ENUM and SET
+	 *
 	 * @param \string $charset
 	 * @return Column
 	 */
@@ -413,6 +460,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column collation, used by CHAR, VARCHAR, *TEXT, ENUM and SET
+	 *
 	 * @param \string $collate
 	 * @return Column
 	 */
@@ -424,6 +472,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column values, used by ENUM and SET
+	 *
 	 * @param \string[] $values
 	 * @return Column
 	 */
@@ -435,6 +484,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column references table
+	 *
 	 * @param \string $on
 	 * @return Column
 	 */
@@ -446,6 +496,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column references columns names
+	 *
 	 * @param \string|\string[] $references
 	 * @return Column
 	 */
@@ -457,6 +508,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column references delete action
+	 *
 	 * @param \string $delete See SQL_Index::REF_* for available values
 	 * @throws \UnexpectedValueException If value is not in SQL_Index::REF_OPTIONS
 	 * @return Column
@@ -469,6 +521,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column references update action
+	 *
 	 * @param \string $update See SQL_Index::REF_* for available values
 	 * @throws \UnexpectedValueException If value is not in SQL_Index::REF_OPTIONS
 	 * @return Column
@@ -481,6 +534,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Column references match
+	 *
 	 * @param \string $match See ForeignKeyMatch for available values
 	 * @throws \UnexpectedValueException If value is not in ForeignKeyMatch
 	 * @return Column
@@ -491,6 +545,12 @@ class Column extends Statements\Query
 		return $this;
 	}
 
+	/**
+	 * Define after which field this field should be set
+	 *
+	 * @param string $field_name
+	 * @return Column
+	 */
 	public function after($field_name)
 	{
 		$this->_before = null;
@@ -498,6 +558,12 @@ class Column extends Statements\Query
 		return $this;
 	}
 
+	/**
+	 * Define before which field this field should be set
+	 *
+	 * @param string $field_name
+	 * @return Column
+	 */
 	public function before($field_name)
 	{
 		$this->_after = null;
@@ -507,6 +573,11 @@ class Column extends Statements\Query
 	#endregion
 
 	#region Type Helpers
+	/**
+	 * Create a new Column query
+	 *
+	 * @return Column
+	 */
 	public static function create()
 	{
 		return new static();
@@ -514,6 +585,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Configure an INT column (-2,147,483,648 to 2,147,483,647; unsigned 0 to 4,294,967,295)
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -524,6 +596,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Configure a TINYINT column (-128 to 127; unsigned 0 to 255)
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -534,6 +607,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Configure a SMALLINT column (-32,768 to 32,767; unsigned 0 to 65,535)
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -544,6 +618,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Configure a MEDIUMINT column (-8,388,608 to 8,388,607, unsigned 0 to 16,777,215)
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -554,6 +629,7 @@ class Column extends Statements\Query
 
 	/**
 	 * Configure a BIGINT column (-2^63 to 2^63-1, unsigned 0 to 2^64-1)
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -566,6 +642,7 @@ class Column extends Statements\Query
 	 * Configure a BIT column (1 to 64)
 	 * The BIT data type is used to store bit values. A type of BIT(M) enables storage of M-bit values. M can range from 1 to 64.
 	 * To specify bit values, b'value' notation can be used. value is a binary value written using zeros and ones. For example, b'111' and b'10000000' represent 7 and 128, respectively.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -578,6 +655,7 @@ class Column extends Statements\Query
 	 * Configure a DOUBLE column (precision 0 to 53)
 	 * The FLOAT and DOUBLE types represent approximate numeric data values. MySQL uses four bytes for single-precision values and eight bytes for double-precision values.
 	 * For FLOAT, the SQL standard permits an optional specification of the precision (but not the range of the exponent) in bits following the keyword FLOAT in parentheses. MySQL also supports this optional precision specification, but the precision value is used only to determine storage size. A precision from 0 to 23 results in a 4-byte single-precision FLOAT column. A precision from 24 to 53 results in an 8-byte double-precision DOUBLE column.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -590,6 +668,7 @@ class Column extends Statements\Query
 	 * Configure a FLOAT column (precision 0 to 23)
 	 * The FLOAT and DOUBLE types represent approximate numeric data values. MySQL uses four bytes for single-precision values and eight bytes for double-precision values.
 	 * For FLOAT, the SQL standard permits an optional specification of the precision (but not the range of the exponent) in bits following the keyword FLOAT in parentheses. MySQL also supports this optional precision specification, but the precision value is used only to determine storage size. A precision from 0 to 23 results in a 4-byte single-precision FLOAT column. A precision from 24 to 53 results in an 8-byte double-precision DOUBLE column.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -601,6 +680,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a DECIMAL column
 	 * The DECIMAL and NUMERIC types store exact numeric data values. These types are used when it is important to preserve exact precision, for example with monetary data. In MySQL, NUMERIC is implemented as DECIMAL, so the following remarks about DECIMAL apply equally to NUMERIC.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -612,6 +692,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a DATE column
 	 * The DATE type is used for values with a date part but no time part. MySQL retrieves and displays DATE values in 'YYYY-MM-DD' format. The supported range is '1000-01-01' to '9999-12-31'.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -624,6 +705,7 @@ class Column extends Statements\Query
 	 * Configure a DATETIME column
 	 * The DATETIME type is used for values that contain both date and time parts. MySQL retrieves and displays DATETIME values in 'YYYY-MM-DD HH:MM:SS' format. The supported range is '1000-01-01 00:00:00' to '9999-12-31 23:59:59'.
 	 * A DATETIME or TIMESTAMP value can include a trailing fractional seconds part in up to microseconds (6 digits) precision.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -635,6 +717,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a TIME column
 	 * MySQL retrieves and displays TIME values in 'HH:MM:SS' format (or 'HHH:MM:SS' format for large hours values). TIME values may range from '-838:59:59' to '838:59:59'. The hours part may be so large because the TIME type can be used not only to represent a time of day (which must be less than 24 hours), but also elapsed time or a time interval between two events (which may be much greater than 24 hours, or even negative).
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -647,6 +730,7 @@ class Column extends Statements\Query
 	 * Configure a TIMESTAMP column
 	 * The TIMESTAMP data type is used for values that contain both date and time parts. TIMESTAMP has a range of '1970-01-01 00:00:01' UTC to '2038-01-19 03:14:07' UTC.
 	 * A DATETIME or TIMESTAMP value can include a trailing fractional seconds part in up to microseconds (6 digits) precision.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -658,6 +742,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a YEAR column
 	 * The YEAR type is a 1-byte type used to represent year values. It can be declared as YEAR or YEAR(4) and has a display width of four characters.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -669,6 +754,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a CHAR column (0 - 255)
 	 * The length of a CHAR column is fixed to the length that you declare when you create the table. The length can be any value from 0 to 255. When CHAR values are stored, they are right-padded with spaces to the specified length. When CHAR values are retrieved, trailing spaces are removed unless the PAD_CHAR_TO_FULL_LENGTH SQL mode is enabled.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -681,6 +767,7 @@ class Column extends Statements\Query
 	 * Configure a VARCHAR column (0 - 65,535)
 	 * Values in VARCHAR columns are variable-length \strings. The length can be specified as a value from 0 to 65,535. The effective maximum length of a VARCHAR is subject to the maximum row size (65,535 bytes, which is shared among all columns) and the character set used.
 	 * In contrast to CHAR, VARCHAR values are stored as a 1-byte or 2-byte length prefix plus data. The length prefix indicates the number of bytes in the value. A column uses one length byte if values require no more than 255 bytes, two length bytes if values may require more than 255 bytes.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -693,6 +780,7 @@ class Column extends Statements\Query
 	 * Configure a BINARY column (0 - 255 bytes)
 	 * The BINARY and VARBINARY types are similar to CHAR and VARCHAR, except that they contain binary \strings rather than nonbinary \strings. That is, they contain byte \strings rather than character \strings. This means they have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in the values.
 	 * The permissible maximum length is the same for BINARY and VARBINARY as it is for CHAR and VARCHAR, except that the length for BINARY and VARBINARY is a length in bytes rather than in characters.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -705,6 +793,7 @@ class Column extends Statements\Query
 	 * Configure a VARBINARY column (0 - 255 bytes)
 	 * The BINARY and VARBINARY types are similar to CHAR and VARCHAR, except that they contain binary \strings rather than nonbinary \strings. That is, they contain byte \strings rather than character \strings. This means they have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in the values.
 	 * The permissible maximum length is the same for BINARY and VARBINARY as it is for CHAR and VARCHAR, except that the length for BINARY and VARBINARY is a length in bytes rather than in characters.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -716,6 +805,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a TINYBLOB column
 	 * A BLOB is a binary large object that can hold a variable amount of data. BLOB values are treated as binary \strings (byte \strings). They have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in column values.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -727,6 +817,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a BLOB column
 	 * A BLOB is a binary large object that can hold a variable amount of data. BLOB values are treated as binary \strings (byte \strings). They have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in column values.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -738,6 +829,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a MEDIUMBLOB column
 	 * A BLOB is a binary large object that can hold a variable amount of data. BLOB values are treated as binary \strings (byte \strings). They have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in column values.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -749,6 +841,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a LONGBLOB column
 	 * A BLOB is a binary large object that can hold a variable amount of data. BLOB values are treated as binary \strings (byte \strings). They have the binary character set and collation, and comparison and sorting are based on the numeric values of the bytes in column values.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -760,6 +853,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a TINYTEXT column (0 - 255)
 	 * A TEXT is a binary large object that can hold a variable amount of data. TEXT values are treated as nonbinary \strings (character \strings). They have a character set other than binary, and values are sorted and compared based on the collation of the character set.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -771,6 +865,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a TEXT column (0 - 65k)
 	 * A TEXT is a binary large object that can hold a variable amount of data. TEXT values are treated as nonbinary \strings (character \strings). They have a character set other than binary, and values are sorted and compared based on the collation of the character set.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -782,6 +877,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a MEDIUMTEXT column (0 - 16.7M)
 	 * A TEXT is a binary large object that can hold a variable amount of data. TEXT values are treated as nonbinary \strings (character \strings). They have a character set other than binary, and values are sorted and compared based on the collation of the character set.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -793,6 +889,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a LONGTEXT column (0 - 4.3G)
 	 * A TEXT is a binary large object that can hold a variable amount of data. TEXT values are treated as nonbinary \strings (character \strings). They have a character set other than binary, and values are sorted and compared based on the collation of the character set.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -804,6 +901,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure an ENUM column
 	 * An ENUM is a \string object with a value chosen from a list of permitted values
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -815,6 +913,7 @@ class Column extends Statements\Query
 	/**
 	 * Configure a SET column
 	 * A SET is a \string object that can have zero or more values, each of which must be chosen from a list of permitted values specified when the table is created. SET column values that consist of multiple set members are specified with members separated by commas (,). A consequence of this is that SET member values should not themselves contain commas.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */
@@ -828,6 +927,7 @@ class Column extends Statements\Query
 	 * As of MySQL 5.7.8, MySQL supports a native JSON data type defined by RFC 7159 that enables efficient access to data in JSON (JavaScript Object Notation) documents. The JSON data type provides these advantages over storing JSON-format \strings in a \string column:
 	 * - Automatic validation of JSON documents stored in JSON columns. Invalid documents produce an error.
 	 * - Optimized storage format. JSON documents stored in JSON columns are converted to an internal format that permits quick read access to document elements. When the server later must read a JSON value stored in this binary format, the value need not be parsed from a text representation. The binary format is structured to enable the server to look up subobjects or nested values directly by key or array index without reading all values before or after them in the document.
+	 *
 	 * @param \string $name Column name
 	 * @return Column
 	 */

@@ -24,6 +24,7 @@ class Update extends Query
 	#region Getters
 	/**
 	 * Get update values
+	 *
 	 * @return \string[]
 	 */
 	public function get_values()
@@ -35,7 +36,9 @@ class Update extends Query
 	#region Setters
 	/**
 	 * Add a join
+	 *
 	 * @param Join $join
+	 * @return Update
 	 */
 	public function join($join)
 	{
@@ -43,18 +46,36 @@ class Update extends Query
 		return $this;
 	}
 
+	/**
+	 * Set table name
+	 *
+	 * @param string $table
+	 * @return Update
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Set table alias
+	 *
+	 * @param string $alias
+	 * @return Update
+	 */
 	public function alias($alias)
 	{
 		$this->set_alias($alias);
 		return $this;
 	}
 
+	/**
+	 * Set update conditions
+	 *
+	 * @param string|string[] $conditions
+	 * @return Update
+	 */
 	public function where($conditions)
 	{
 		$this->set_conditions($conditions);
@@ -63,6 +84,7 @@ class Update extends Query
 
 	/**
 	 * Add a value.
+	 *
 	 * @param \string $field Field name with alias if needed
 	 * @param mixed $value Value
 	 * @return Update
@@ -77,6 +99,7 @@ class Update extends Query
 
 	/**
 	 * Set all values at once. Do not replace values already set, except if the field already exists. The field type will be infered from the value type.
+	 *
 	 * @param string[] $values An array of field => value
 	 * @return Update
 	 */
@@ -94,6 +117,7 @@ class Update extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return Update
 	 */
 	public function new_query()
@@ -108,6 +132,7 @@ class Update extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -123,6 +148,11 @@ class Update extends Query
 		return "UPDATE {$this->parse_query_table()}{$this->parse_query_alias()}{$nl}SET $values$where";
 	}
 
+	/**
+	 * Create a new UPDATE query
+	 *
+	 * @return Update
+	 */
 	public static function create()
 	{
 		return new static();

@@ -15,26 +15,35 @@ trait ForeignKeyTrait
 	#region Variables
 	/**
 	 * Foreign key references table
+	 *
 	 * @var \string
 	 */
 	protected $_on;
+
 	/**
 	 * Foreign key references columns
+	 *
 	 * @var \string|\string[]
 	 */
 	protected $_references;
+
 	/**
 	 * Foreign key references delete action, see ForeignKeyAction for available values
+	 *
 	 * @var \string
 	 */
 	protected $_delete;
+
 	/**
 	 * Foreign key references update action, see ForeignKeyAction for available values
+	 *
 	 * @var \string
 	 */
 	protected $_update;
+
 	/**
 	 * Foreign Key match type, see ForeignKeyMatch for available values
+	 *
 	 * @var string
 	 */
 	protected $_match;
@@ -43,6 +52,7 @@ trait ForeignKeyTrait
 	#region Getters
 	/**
 	 * Get index references table
+	 *
 	 * @return \string
 	 */
 	public function get_on()
@@ -52,6 +62,7 @@ trait ForeignKeyTrait
 
 	/**
 	 * Get index references columns
+	 *
 	 * @return \string
 	 */
 	public function get_references()
@@ -61,6 +72,7 @@ trait ForeignKeyTrait
 
 	/**
 	 * Get index delete
+	 *
 	 * @return \string
 	 */
 	public function get_delete()
@@ -70,6 +82,7 @@ trait ForeignKeyTrait
 
 	/**
 	 * Get index update
+	 *
 	 * @return \string
 	 */
 	public function get_update()
@@ -79,6 +92,7 @@ trait ForeignKeyTrait
 
 	/**
 	 * Get index match
+	 *
 	 * @return \string
 	 */
 	public function get_match()
@@ -88,94 +102,71 @@ trait ForeignKeyTrait
 	#endregion
 
 	#region Setters
-
 	/**
 	 * Set foreign key references table
-	 * @param \string $on
-	 */
-	public abstract function on($on);
-
-	/**
-	 * Set foreign key references table
+	 *
 	 * @param \string $on
 	 */
 	protected function set_on($on)
 	{
 		$this->_on = $on;
-		return $this;
 	}
 
 	/**
 	 * Set foreign key references columns
-	 * @param \string[] $references
-	 */
-	public abstract function references(...$references);
-
-	/**
-	 * Set foreign key references columns
+	 *
 	 * @param \string[] $references
 	 */
 	protected function set_references(...$references)
 	{
 		$this->_references = $references;
-		return $this;
 	}
 
 	/**
 	 * Set foreign key references delete action, see ForeignKeyAction for available values
+	 *
 	 * @param \string $delete
-	 */
-	public abstract function delete($delete);
-
-	/**
-	 * Set foreign key references delete action, see ForeignKeyAction for available values
-	 * @param \string $delete
+	 * @throws \UnexpectedValueException
 	 */
 	protected function set_delete($delete)
 	{
 		if (!empty($delete) && !ForeignKeyAction::isValidValue($delete))
 			throw new \UnexpectedValueException("Index {$this->_default_name()}: invalid delete action ('$delete'). Expected values are ".implode(', ', array_map([$this, '_quote'], ForeignKeyAction::values()))." or empty.");
 		$this->_delete = $delete;
-		return $this;
 	}
 
 	/**
 	 * Set foreign key references update action, see ForeignKeyAction for available values
+	 *
 	 * @param \string $update
-	 */
-	public abstract function update($update);
-
-	/**
-	 * Set foreign key references update action, see ForeignKeyAction for available values
-	 * @param \string $update
+	 * @throws \UnexpectedValueException
 	 */
 	protected function set_update($update)
 	{
 		if (!empty($update) && !ForeignKeyAction::isValidValue($update))
 			throw new \UnexpectedValueException("Index {$this->_default_name()}: invalid update action ('$update'). Expected values are ".implode(', ', array_map([$this, '_quote'], ForeignKeyAction::values()))." or empty.");
 		$this->_update = $update;
-		return $this;
 	}
 
 	/**
 	 * Set foreign key match, see ForeignKeyMatch for available values
+	 *
 	 * @param \string $match
-	 */
-	public abstract function match($match);
-
-	/**
-	 * Set foreign key match, see ForeignKeyMatch for available values
-	 * @param \string $match
+	 * @throws \UnexpectedValueException
 	 */
 	protected function set_match($match)
 	{
 		if (!empty($match) && !ForeignKeyMatch::isValidValue($match))
 			throw new \UnexpectedValueException("Index {$this->_default_name()}: invalid match ('$match'). Expected values are ".implode(', ', array_map([$this, '_quote'], ForeignKeyMatch::values()))." or empty.");
 		$this->_match = $match;
-		return $this;
 	}
 	#endregion
 
+	/**
+	 * Reset foreign key query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_foreignkey()
 	{
 		$this->_on = null;
@@ -185,6 +176,11 @@ trait ForeignKeyTrait
 		$this->_update = null;
 	}
 
+	/**
+	 * Get foreign key query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_foreignkey()
 	{
 		if (!$this->_on && !$this->_references)

@@ -12,12 +12,14 @@ trait NameTrait
 {
 	/**
 	 * Name
+	 *
 	 * @var \string
 	 */
 	protected $_name;
 
 	/**
 	 * Get name
+	 *
 	 * @return \string
 	 */
 	public function get_name()
@@ -27,25 +29,29 @@ trait NameTrait
 
 	/**
 	 * Set name
-	 * @param \string $name
-	 */
-	public abstract function name($name);
-
-	/**
-	 * Set name
+	 *
 	 * @param \string $name
 	 */
 	protected function set_name($name)
 	{
 		$this->_name = $name;
-		return $this;
 	}
 
+	/**
+	 * Reset name query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_name()
 	{
 		$this->_name = null;
 	}
 
+	/**
+	 * Get name query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_name()
 	{
 		$name = $this->_name;

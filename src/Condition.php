@@ -26,6 +26,7 @@ abstract class Condition
 	 * ('date', time(), ConditionType::DATETIME) => `date` = '2018-01-01T13:00:00+02:00'
 	 * ('date', [strtotime('first day of this month'), strtotime('last day of this month')], ConditionType::DATE, ConditionOperator::BETWEEN) => `date` BETWEEN '2018-04-01' AND '2018-04-30'
 	 * ('a.id', 'b.id', ConditionType::COLUMN) => `a`.`id` = `b`.`id`
+	 *
 	 * @param \string $field The field name with alias if needed
 	 * @param mixed $values The values to test.
 	 *						Note about string fields: they will be slashed and quoted with SQLHelper::quote

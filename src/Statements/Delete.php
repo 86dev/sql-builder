@@ -44,6 +44,7 @@ class Delete extends Query
 	#region Setters
 	/**
 	 * Add a join
+	 *
 	 * @param \SQLBuilder\Join $join
 	 * @return Delete
 	 */
@@ -95,6 +96,7 @@ class Delete extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return Delete
 	 */
 	public function new_query()
@@ -108,6 +110,7 @@ class Delete extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -127,10 +130,11 @@ class Delete extends Query
 	/**
 	 * Create a new DELETE statement
 	 *
+	 * @param string $from Table name to delete from
 	 * @return Delete
 	 */
-	public static function create()
+	public static function create($from = null)
 	{
-		return new static();
+		return (new static())->from($from);
 	}
 }

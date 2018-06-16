@@ -27,18 +27,39 @@ class InsertSelect extends InsertBase
 
 	#region Setters
 
+	/**
+	 * Set the table to insert into
+	 *
+	 * @param string $table
+	 * @return InsertSelect
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Add a field to insert
+	 *
+	 * @param string $field
+	 * @param string $table
+	 * @param string $alias
+	 * @param boolean $do_not_use_backtick
+	 * @return InsertSelect
+	 */
 	public function field($field, $table = '', $alias = '', $do_not_use_backtick = false)
 	{
 		$this->add_field($field, $table, $alias, $do_not_use_backtick);
 		return $this;
 	}
 
+	/**
+	 * Set a list of fields to insert
+	 *
+	 * @param string[] ...$fields
+	 * @return InsertSelect
+	 */
 	public function fields(...$fields)
 	{
 		$this->set_fields($fields);
@@ -47,7 +68,9 @@ class InsertSelect extends InsertBase
 
 	/**
 	 * Set whether the value must be ignored if an error occured
+	 *
 	 * @param \bool $ignore
+	 * @return InsertSelect
 	 */
 	public function ignore($ignore = true)
 	{
@@ -57,10 +80,12 @@ class InsertSelect extends InsertBase
 
 	/**
 	 * Set the SELECT statement
+	 *
 	 * @param Select $select
+	 * @throws \UnexpectedValueException
 	 * @return InsertSelect
 	 */
-	public function select($select)
+	public function select(Select $select)
 	{
 		if (!is_a($select, Select::class))
 			throw new \UnexpectedValueException('Index : select must be a \SQLBuilder\Select instance');
@@ -71,6 +96,7 @@ class InsertSelect extends InsertBase
 
 	/**
 	 * Reset the query
+	 *
 	 * @return InsertSelect
 	 */
 	public function new_query()
@@ -81,7 +107,8 @@ class InsertSelect extends InsertBase
 	}
 
 	/**
-	 * Get the query SQL
+	 * Get the query string
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -99,6 +126,11 @@ class InsertSelect extends InsertBase
 		return "$sql$nl$select";
 	}
 
+	/**
+	 * Create a new INSERT INTO ... SELECT ... query
+	 *
+	 * @return void
+	 */
 	public static function create()
 	{
 		return new static();

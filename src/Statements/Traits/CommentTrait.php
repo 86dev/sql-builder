@@ -18,6 +18,7 @@ trait CommentTrait
 
 	/**
 	 * Get index comment
+	 *
 	 * @return \string
 	 */
 	public function get_comment()
@@ -27,25 +28,29 @@ trait CommentTrait
 
 	/**
 	 * Set index comment
-	 * @param \string $comment
-	 */
-	public abstract function comment($comment);
-
-	/**
-	 * Set index comment
+	 *
 	 * @param \string $comment
 	 */
 	protected function set_comment($comment)
 	{
 		$this->_comment = $comment;
-		return $this;
 	}
 
+	/**
+	 * Reset comment query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_comment()
 	{
 		$this->_comment = null;
 	}
 
+	/**
+	 * Get comment query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_comment()
 	{
 		return $this->_comment ? "COMMENT {$this->_quote($this->_comment)}" : '';

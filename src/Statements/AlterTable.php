@@ -192,6 +192,7 @@ class AlterTable extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return AlterTable
 	 */
 	public function new_query()
@@ -206,6 +207,7 @@ class AlterTable extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -239,8 +241,8 @@ class AlterTable extends Query
 	 *
 	 * @return AlterTable
 	 */
-	public static function create()
+	public static function create($table = null)
 	{
-		return new static();
+		return (new static())->table($table);
 	}
 }

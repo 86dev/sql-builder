@@ -14,12 +14,14 @@ trait ConditionsTrait
 {
 	/**
 	 * Conditions
+	 *
 	 * @var \string[]
 	 */
 	protected $_conditions;
 
 	/**
 	 * Get conditions
+	 *
 	 * @return \string[]
 	 */
 	public function get_conditions()
@@ -29,11 +31,13 @@ trait ConditionsTrait
 
 	/**
 	 * Set conditions
+	 *
 	 * @param \string[] $conditions
-	 * @return static
 	 */
 	protected function set_conditions($conditions)
 	{
+		if ($conditions === null) return;
+
 		if (!is_array($conditions))
 			$conditions = [$conditions];
 		foreach ($conditions as $key => $condition)
@@ -43,15 +47,24 @@ trait ConditionsTrait
 		}
 
 		$this->_conditions = array_merge($this->_conditions, $conditions);
-		return $this;
 	}
 
+	/**
+	 * Reset conditions query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_conditions()
 	{
 		$this->_conditions = ['relation' => ConditionRelation::_AND];
 		return $this;
 	}
 
+	/**
+	 * Get conditions query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_conditions()
 	{
 		return $this->conditions_walker($this->_conditions);
@@ -59,6 +72,7 @@ trait ConditionsTrait
 
 	/**
 	 * Walk through the conditions array to generate a WHERE/ON clause
+	 *
 	 * @param \string[] $conditions
 	 * @return \string
 	 */

@@ -29,36 +29,74 @@ class Primary extends Statements\Query
 			$this->fields(...$columns);
 	}
 
+	/**
+	 * Set index name
+	 *
+	 * @param string $name
+	 * @return Primary
+	 */
 	public function name($name)
 	{
 		$this->set_name($name);
 		return $this;
 	}
 
+	/**
+	 * Set Index action
+	 *
+	 * @param string $action
+	 * @return Primary
+	 */
 	public function action($action)
 	{
 		$this->set_action($action);
 		return $this;
 	}
 
+	/**
+	 * Set Index table
+	 *
+	 * @param string $table
+	 * @return Primary
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Set index comment
+	 *
+	 * @param string $comment
+	 * @return Primary
+	 */
 	public function comment($comment)
 	{
 		$this->set_comment($comment);
 		return $this;
 	}
 
+	/**
+	 * Add a field
+	 *
+	 * @param string $field
+	 * @param string $table
+	 * @param string $alias
+	 * @return Primary
+	 */
 	public function field($field, $table = '', $alias = '')
 	{
 		$this->add_field($field, $table, $alias);
 		return $this;
 	}
 
+	/**
+	 * Set fields
+	 *
+	 * @param string ...$fields
+	 * @return Primary
+	 */
 	public function fields(...$fields)
 	{
 		$this->set_fields($fields);
@@ -67,7 +105,8 @@ class Primary extends Statements\Query
 
 	/**
 	 * Reset the query
-	 * @return Index
+	 *
+	 * @return Primary
 	 */
 	public function new_query()
 	{
@@ -78,7 +117,7 @@ class Primary extends Statements\Query
 	/**
 	 * Get the query SQL
 	 *
-	 * @return Index
+	 * @return string
 	 */
 	public function parse_query()
 	{
@@ -108,6 +147,11 @@ class Primary extends Statements\Query
 		return trim($sql);
 	}
 
+	/**
+	 * Create a new PRIMARY query
+	 *
+	 * @return Primary
+	 */
 	public static function create()
 	{
 		return new static();
