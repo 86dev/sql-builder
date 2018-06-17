@@ -30,19 +30,39 @@ class Insert extends InsertBase
 	#endregion
 
 	#region Setters
-
+	/**
+	 * The table to insert into
+	 *
+	 * @param string $table
+	 * @return Insert
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Add a field to insert
+	 *
+	 * @param string $field
+	 * @param string $table
+	 * @param string $alias
+	 * @param boolean $do_not_use_backtick
+	 * @return Insert
+	 */
 	public function field($field, $table = '', $alias = '', $do_not_use_backtick = false)
 	{
 		$this->add_field($field, $table, $alias, $do_not_use_backtick);
 		return $this;
 	}
 
+	/**
+	 * Set a list of fields to insert
+	 *
+	 * @param string[] ...$fields
+	 * @return Insert
+	 */
 	public function fields(...$fields)
 	{
 		$this->set_fields($fields);
@@ -52,6 +72,7 @@ class Insert extends InsertBase
 	/**
 	 * Set whether the value must be ignored if an error occured
 	 * @param \bool $ignore
+	 * @return Insert
 	 */
 	public function ignore($ignore = true)
 	{
@@ -123,6 +144,11 @@ class Insert extends InsertBase
 		return "$sql{$nl}VALUES $values";
 	}
 
+	/**
+	 * Create a new Insert statement
+	 *
+	 * @return Insert
+	 */
 	public static function create()
 	{
 		return new static();

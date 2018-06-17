@@ -173,6 +173,7 @@ class ForeignKey extends Statements\Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return ForeignKey
 	 */
 	public function new_query()
@@ -183,6 +184,7 @@ class ForeignKey extends Statements\Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return \string
 	 */
 	public function parse_query()

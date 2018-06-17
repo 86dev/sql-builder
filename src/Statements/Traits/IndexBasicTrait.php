@@ -17,9 +17,9 @@ trait IndexBasicTrait
 	use CommentTrait;
 
 	/**
-	 * Reset the query
+	 * Reset basic index query value
 	 *
-	 * @return static
+	 * @return void
 	 */
 	protected function new_query_basicindex()
 	{
@@ -30,6 +30,11 @@ trait IndexBasicTrait
 		$this->new_query_comment();
 	}
 
+	/**
+	 * Get index default name
+	 *
+	 * @return string
+	 */
 	protected function _default_name()
 	{
 		return $this->_name ?: join('_', array_merge([$this->_table], $this->_fields, ['index']));

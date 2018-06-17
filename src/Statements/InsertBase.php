@@ -26,6 +26,7 @@ abstract class InsertBase extends Query
 	/**
 	 * Set whether the value must be ignored if an error occured
 	 * @param \bool $ignore
+	 * @return InsertBase
 	 */
 	public function set_ignore($ignore = true)
 	{

@@ -16,9 +16,9 @@ trait IndexTrait
 	use SpatialTrait;
 
 	/**
-	 * Reset the query
+	 * Reset index query value
 	 *
-	 * @return static
+	 * @return void
 	 */
 	protected function new_query_index()
 	{
@@ -30,12 +30,7 @@ trait IndexTrait
 
 	/**
 	 * Set whether the value must be fulltext
-	 * @param \bool $fulltext
-	 */
-	public abstract function fulltext($fulltext = true);
-
-	/**
-	 * Set whether the value must be fulltext
+	 *
 	 * @param \bool $fulltext
 	 */
 	protected function set_fulltext($fulltext = true)
@@ -46,17 +41,11 @@ trait IndexTrait
 			$this->_spatial = false;
 			$this->_unique = false;
 		}
-		return $this;
 	}
 
 	/**
 	 * Set whether the value must be spatial
-	 * @param \bool $spatial
-	 */
-	public abstract function spatial($spatial = true);
-
-	/**
-	 * Set whether the value must be spatial
+	 *
 	 * @param \bool $spatial
 	 */
 	protected function set_spatial($spatial = true)
@@ -67,17 +56,11 @@ trait IndexTrait
 			$this->_fulltext = false;
 			$this->_unique = false;
 		}
-		return $this;
 	}
 
 	/**
 	 * Set whether the value must be unique
-	 * @param \bool $unique
-	 */
-	public abstract function unique($unique = true);
-
-	/**
-	 * Set whether the value must be unique
+	 *
 	 * @param \bool $unique
 	 */
 	protected function set_unique($unique = true)
@@ -88,9 +71,13 @@ trait IndexTrait
 			$this->_fulltext = false;
 			$this->_spatial = false;
 		}
-		return $this;
 	}
 
+	/**
+	 * Get index default name
+	 *
+	 * @return string
+	 */
 	protected function _default_name()
 	{
 		$type = $this->_unique ? 'unique' : ($this->_fulltext ? 'fulltext' : ($this->_spatial ? 'spatial' : 'index'));

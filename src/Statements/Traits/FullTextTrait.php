@@ -12,12 +12,14 @@ trait FullTextTrait
 {
 	/**
 	 * Indicate whether the value must be fulltext
+	 *
 	 * @var \bool
 	 */
 	protected $_fulltext;
 
 	/**
 	 * Indicate whether the value must be fulltext
+	 *
 	 * @return \bool
 	 */
 	public function get_fulltext()
@@ -27,25 +29,29 @@ trait FullTextTrait
 
 	/**
 	 * Set whether the value must be fulltext
-	 * @param \bool $fulltext
-	 */
-	public abstract function fulltext($fulltext = true);
-
-	/**
-	 * Set whether the value must be fulltext
+	 *
 	 * @param \bool $fulltext
 	 */
 	protected function set_fulltext($fulltext = true)
 	{
 		$this->_fulltext = $fulltext;
-		return $this;
 	}
 
+	/**
+	 * Reset fulltext query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_fulltext()
 	{
 		$this->_fulltext = false;
 	}
 
+	/**
+	 * Get fulltext query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_fulltext()
 	{
 		return $this->_fulltext ? ' FULLTEXT' : '';

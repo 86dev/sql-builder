@@ -12,12 +12,14 @@ trait CharsetTrait
 {
 	/**
 	 * Charset
+	 *
 	 * @var \string
 	 */
 	protected $_charset;
 
 	/**
 	 * Get charset
+	 *
 	 * @return \string
 	 */
 	public function get_charset()
@@ -27,25 +29,29 @@ trait CharsetTrait
 
 	/**
 	 * Set charset
-	 * @param \string $charset
-	 */
-	public abstract function charset($charset);
-
-	/**
-	 * Set charset
+	 *
 	 * @param \string $charset
 	 */
 	protected function set_charset($charset)
 	{
 		$this->_charset = $charset;
-		return $this;
 	}
 
+	/**
+	 * Reset cherset query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_charset()
 	{
 		$this->_charset = null;
 	}
 
+	/**
+	 * Get charset query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_charset()
 	{
 		return $this->_charset ? "CHARSET $this->_charset" : '';

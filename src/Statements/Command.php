@@ -6,6 +6,7 @@ namespace SQLBuilder\Statements;
  *
  * @version 1.0
  * @author 86Dev
+ * @deprecated 1.0.4
  */
 class Command extends Query
 {

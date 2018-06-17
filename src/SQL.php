@@ -46,7 +46,7 @@ abstract class SQL
 	}
 
 	/**
-	 * Build a ALTER TABLKE query
+	 * Build a ALTER TABLE query
 	 *
 	 * @param string $name
 	 * @return Statements\AlterTable

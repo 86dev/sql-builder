@@ -30,54 +30,110 @@ class Index extends Statements\Query
 			$this->fields(...$columns);
 	}
 
+	/**
+	 * Set index name
+	 *
+	 * @param string $name
+	 * @return Index
+	 */
 	public function name($name)
 	{
 		$this->set_name($name);
 		return $this;
 	}
 
+	/**
+	 * Set Index action
+	 *
+	 * @param string $action
+	 * @return Index
+	 */
 	public function action($action)
 	{
 		$this->set_action($action);
 		return $this;
 	}
 
+	/**
+	 * Set Index table
+	 *
+	 * @param string $table
+	 * @return Index
+	 */
 	public function table($table)
 	{
 		$this->set_table($table);
 		return $this;
 	}
 
+	/**
+	 * Set index comment
+	 *
+	 * @param string $comment
+	 * @return Index
+	 */
 	public function comment($comment)
 	{
 		$this->set_comment($comment);
 		return $this;
 	}
 
+	/**
+	 * Add a field
+	 *
+	 * @param string $field
+	 * @param string $table
+	 * @param string $alias
+	 * @return Index
+	 */
 	public function field($field, $table = '', $alias = '')
 	{
 		$this->add_field($field, $table, $alias);
 		return $this;
 	}
 
+	/**
+	 * Set fields
+	 *
+	 * @param string ...$fields
+	 * @return Index
+	 */
 	public function fields(...$fields)
 	{
 		$this->set_fields($fields);
 		return $this;
 	}
 
+	/**
+	 * Set if index is unique
+	 *
+	 * @param boolean $unique
+	 * @return Index
+	 */
 	public function unique($unique = true)
 	{
 		$this->set_unique($unique);
 		return $this;
 	}
 
+	/**
+	 * Set if index is fulltext
+	 *
+	 * @param boolean $fulltext
+	 * @return Index
+	 */
 	public function fulltext($fulltext = true)
 	{
 		$this->set_fulltext($fulltext);
 		return $this;
 	}
 
+	/**
+	 * Set if index is spatial
+	 *
+	 * @param boolean $spatial
+	 * @return Index
+	 */
 	public function spatial($spatial = true)
 	{
 		$this->set_spatial($spatial);
@@ -86,6 +142,7 @@ class Index extends Statements\Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return Index
 	 */
 	public function new_query()
@@ -132,6 +189,11 @@ class Index extends Statements\Query
 		return $this->sql;
 	}
 
+	/**
+	 * Create a new INDEX query
+	 *
+	 * @return Index
+	 */
 	public static function create()
 	{
 		return new static();

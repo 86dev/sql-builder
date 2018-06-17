@@ -12,12 +12,14 @@ trait JoinsTrait
 {
 	/**
 	 * Joins
+	 *
 	 * @var \SQLBuilder\Join[]
 	 */
 	protected $_joins;
 
 	/**
 	 * Get joins
+	 *
 	 * @return \SQLBuilder\Join[]
 	 */
 	public function get_joins()
@@ -27,12 +29,7 @@ trait JoinsTrait
 
 	/**
 	 * Add a join
-	 * @param \SQLBuilder\Join $join
-	 */
-	public abstract function join($join);
-
-	/**
-	 * Add a join
+	 *
 	 * @param \SQLBuilder\Join $join
 	 */
 	protected function add_join(\SQLBuilder\Join $join)
@@ -40,15 +37,24 @@ trait JoinsTrait
 		if (!is_a($join, \SQLBuilder\Join::class))
 			throw new \UnexpectedValueException('Join must be a '.\SQLBuilder\Join::class);
 		$this->_joins[] = $join;
-		return $this;
 	}
 
+	/**
+	 * Reset join query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_join()
 	{
 		$this->_joins = [];
 		return $this;
 	}
 
+	/**
+	 * Get join query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_join()
 	{
 		if (!count($this->_joins))

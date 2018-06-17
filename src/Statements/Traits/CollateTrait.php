@@ -18,6 +18,7 @@ trait CollateTrait
 
 	/**
 	 * Get collate
+	 *
 	 * @return \string
 	 */
 	public function get_collate()
@@ -27,25 +28,29 @@ trait CollateTrait
 
 	/**
 	 * Set collate
-	 * @param \string $collate
-	 */
-	public abstract function collate($collate);
-
-	/**
-	 * Set collate
+	 *
 	 * @param \string $collate
 	 */
 	protected function set_collate($collate)
 	{
 		$this->_collate = $collate;
-		return $this;
 	}
 
+	/**
+	 * Reset collate query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_collate()
 	{
 		$this->_collate = null;
 	}
 
+	/**
+	 * Get collate query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_collate()
 	{
 		return $this->_collate ? "COLLATE $this->_collate" : '';

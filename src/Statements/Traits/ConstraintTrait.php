@@ -18,6 +18,7 @@ trait ConstraintTrait
 
 	/**
 	 * Get index constraint
+	 *
 	 * @return \string
 	 */
 	public function get_constraint()
@@ -27,25 +28,36 @@ trait ConstraintTrait
 
 	/**
 	 * Set index constraint
+	 *
 	 * @param \string $constraint
 	 */
 	public abstract function constraint($constraint);
 
 	/**
 	 * Set index constraint
+	 *
 	 * @param \string $constraint
 	 */
 	protected function set_constraint($constraint)
 	{
 		$this->_constraint = $constraint;
-		return $this;
 	}
 
+	/**
+	 * Reset constraint query value
+	 *
+	 * @return void
+	 */
 	protected function new_query_constraint()
 	{
 		$this->_constraint = null;
 	}
 
+	/**
+	 * Get constraint query string
+	 *
+	 * @return string
+	 */
 	protected function parse_query_constraint()
 	{
 		return $this->_constraint ? "ALGORITHM = $this->_constraint" : '';

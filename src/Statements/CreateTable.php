@@ -22,16 +22,37 @@ class CreateTable extends Query
 	use Traits\NameTrait;
 
 	#region Variables
+	/**
+	 * Columns definitions
+	 *
+	 * @var Column[]
+	 */
 	protected $_columns;
+
+	/**
+	 * Indexes definitions
+	 *
+	 * @var Index[]
+	 */
 	protected $_indexes;
 	#endregion
 
 	#region Getters
+	/**
+	 * Get columns definitions
+	 *
+	 * @return Column[]
+	 */
 	public function get_columns()
 	{
 		return $this->_columns;
 	}
 
+	/**
+	 * Get indexes definitions
+	 *
+	 * @return Index[]
+	 */
 	public function get_indexes()
 	{
 		return $this->_indexes;
@@ -84,7 +105,6 @@ class CreateTable extends Query
 	 * @param string $charset
 	 * @return CreateTable
 	 */
-
 	public function charset($charset)
 	{
 		$this->set_charset($charset);
@@ -201,6 +221,7 @@ class CreateTable extends Query
 
 	/**
 	 * Reset the query
+	 *
 	 * @return CreateTable
 	 */
 	public function new_query()
@@ -213,6 +234,7 @@ class CreateTable extends Query
 
 	/**
 	 * Get the query SQL
+	 *
 	 * @return string
 	 */
 	public function parse_query()
@@ -232,10 +254,12 @@ class CreateTable extends Query
 	/**
 	 * Create a new CREATE TABLE statement
 	 *
+	 * @param string $name Table name
+	 * @param bool $ifnotexists Create table only if it does not exist
 	 * @return CreateTable
 	 */
-	public static function create()
+	public static function create($name = null, $ifnotexists = false)
 	{
-		return new static();
+		return (new static())->name($name)->ifnotexists($ifnotexists);
 	}
 }
