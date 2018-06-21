@@ -19,6 +19,20 @@ class SelectTest extends TestCase
 			SQL::select()->select('name')->from('users')->where(['id' => 1])->parse_query());
 	}
 
+	public function testSelectFromWhereComplex()
+	{
+		$this->assertEquals('SELECT `name` FROM `users` WHERE (`id` = 1 OR (`login` LIKE \'%test%\' OR `login` LIKE \'%truc%\'))',
+			SQL::select()
+				->select('name')
+				->from('users')
+				->where([
+					'relation' => 'OR',
+					['field' => 'id', 'values' => 1],
+					['field' => 'login', 'values' => ['test', 'truc'], 'operator' => 'LIKE']
+				])->parse_query()
+		);
+	}
+
 	public function testSelectFromJoinWhere()
 	{
 		$this->assertEquals('SELECT `u`.`name` FROM `users` AS `u` INNER JOIN `users_roles` AS `ur` ON `ur`.`user_id` = `u`.`id` WHERE `ur`.`role_id` = 1',
@@ -56,7 +70,7 @@ class SelectTest extends TestCase
 			->from('users')
 			->where(['id' => 1])
 			->groupby('name')
-			->having(Condition::gt('COUNT(*)', 1, null, true))
+			->having(Condition::gt('COUNT(*)', 1)->do_not_use_backtick())
 			->parse_query());
 	}
 

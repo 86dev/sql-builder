@@ -3,6 +3,7 @@
 namespace SQLBuilder\Statements\Traits;
 use SQLBuilder\Condition;
 use SQLBuilder\Enums\ConditionRelation;
+use SQLBuilder\Enums\ConditionOperation;
 
 /**
  * Define conditions properties and behavior
@@ -32,18 +33,18 @@ trait ConditionsTrait
 	/**
 	 * Set conditions
 	 *
-	 * @param \string[] $conditions
+	 * @param mixed $conditions
 	 */
 	protected function set_conditions($conditions)
 	{
 		if ($conditions === null) return;
 
-		if (!is_array($conditions))
+		if (!is_array($conditions) || array_key_exists('field', $conditions))
 			$conditions = [$conditions];
 		foreach ($conditions as $key => $condition)
 		{
 			if (is_string($key) && $key !== 'relation')
-				$conditions[$key] = Condition::make($key, $condition);
+				$conditions[$key] = Condition::eq($key, $condition);
 		}
 
 		$this->_conditions = array_merge($this->_conditions, $conditions);
@@ -94,8 +95,15 @@ trait ConditionsTrait
 			if ($sql)
 				$sql .= " $relation ";
 
-			if (is_array($condition))
-				$sql .= $this->conditions_walker($condition);
+			if (is_a($condition, Condition::class))
+				$sql .= $condition->parse_query();
+			else if (is_array($condition))
+			{
+				if (array_key_exists('field', $condition))
+					$sql .= Condition::fromArray($condition)->parse_query();
+				else
+					$sql .= $this->conditions_walker($condition);
+			}
 			else
 				$sql .= $condition;
 		}

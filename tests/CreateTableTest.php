@@ -12,7 +12,7 @@ class CreateTableTest extends TestCase
 		$table->varchar('email')->length(190)->unique();
 		$table->enum('gender')->values(['F', 'M'])->_default('F')->default_quoted();
 		$table->int('company_id')->nullable()->unsigned();
-		$table->index(['last_name', 'first_name']);
+		$table->index('last_name', 'first_name');
 		$table->foreign_key('company_id')->on('companies')->references('id');
 
 		$this->assertEquals("CREATE TABLE IF NOT EXISTS `users` ("
