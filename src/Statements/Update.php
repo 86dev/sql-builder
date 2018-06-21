@@ -85,22 +85,38 @@ class Update extends Query
 	/**
 	 * Add a value.
 	 *
-	 * @param \string $field Field name with alias if needed
+	 * @param string $field Field name with alias if needed
 	 * @param mixed $value Value
+	 * @param string $table Table name or alias
+	 * @param string $type Value type
 	 * @return Update
 	 */
-	public function set($field, $value, $type = null)
+	public function set($field, $value, $table = null, $type = null)
 	{
 		if (!$field || !is_string($field))
 			throw new \UnexpectedValueException("Update $this->_table : field must be defined");
-		$this->_values[$field] = Condition::eq($field, $value, $type);
+		$this->_values[$field] = Condition::eq($field, $value, $table, $type);
+		return $this;
+	}
+
+	/**
+	 * Add a value
+	 *
+	 * @param Condition $condition
+	 * @return Update
+	 */
+	public function setCondition($condition)
+	{
+		if (!$condition || !is_a($condition, Condition::class))
+			throw new \UnexpectedValueException("Update $this->_table : condition must be defined");
+		$this->_values[$condition->get_field()] = $condition;
 		return $this;
 	}
 
 	/**
 	 * Set all values at once. Do not replace values already set, except if the field already exists. The field type will be infered from the value type.
 	 *
-	 * @param string[] $values An array of field => value
+	 * @param string[]|Condition[] $values An array of field => value or an array of Condition
 	 * @return Update
 	 */
 	public function set_many($values)
@@ -109,7 +125,10 @@ class Update extends Query
 			throw new \UnexpectedValueException('Update $this->_table : values must be an array');
 		foreach ($values as $field => $value)
 		{
-			$this->set($field, $value);
+			if (is_a($value, Condition::class))
+				$this->setCondition($value);
+			else
+				$this->set($field, $value);
 		}
 		return $this;
 	}
@@ -142,10 +161,21 @@ class Update extends Query
 
 		$nl = $this->_prettify ? "\n" : ' ';
 		$nlt = $this->_prettify ? "\n\t" : ' ';
-		$values = implode(",$nlt", $this->_values);
+		$values = [];
+		foreach ($this->_values as $value)
+		{
+			if (is_a($value, Condition::class))
+				$values[] = $value->parse_query();
+			else if (is_array($value))
+				$values[] = Condition::fromArray($value)->parse_query();
+			else
+				$values[] = $value;
+		}
+		$values = implode(",$nlt", $values);
+		$join = $this->parse_query_join().$nl;
 		$where = count($this->_conditions) ? $nl.'WHERE '.$this->parse_query_conditions() : '';
 
-		return "UPDATE {$this->parse_query_table()}{$this->parse_query_alias()}{$nl}SET $values$where";
+		return "UPDATE {$this->parse_query_table()}{$this->parse_query_alias()}{$join}SET $values$where";
 	}
 
 	/**

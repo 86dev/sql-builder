@@ -24,4 +24,6 @@ abstract class ConditionOperation extends \PHPTools\Enum
 	const NOTLIKE = 'NOT LIKE';
 	const ISNULL = 'IS NULL';
 	const ISNOTNULL = 'IS NOT NULL';
+
+	const NEGATIVES = [self::NEQ, self::ISNOTNULL, self::NOTBETWEEN, self::NOTIN, self::NOTLIKE];
 }

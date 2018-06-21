@@ -212,7 +212,11 @@ class Join extends Statements\Query
 	 */
 	public function new_query()
 	{
-		return $this->new_query_table()->new_query_alias()->new_query_conditions()->left()->outer();
+		$this->new_query_table();
+		$this->new_query_alias();
+		$this->new_query_conditions();
+		$this->left()->outer();
+		return $this;
 	}
 
 	/**
