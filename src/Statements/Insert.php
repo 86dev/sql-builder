@@ -139,7 +139,7 @@ class Insert extends InsertBase
 
 		$nl = $this->_prettify ? "\n" : ' ';
 		$nlt = $this->_prettify ? "\n\t" : ' ';
-		$values = implode(",$nlt", array_map(function($values) { return '('.implode(", ", array_map(function($value) { return Condition::prepare_value($value); }, $values)).')'; }, $this->_values));
+		$values = implode(",$nlt", array_map(function($values) { return '('.implode(", ", array_map(function($value) { return Condition::prepare_value($value, null, true); }, $values)).')'; }, $this->_values));
 
 		return "$sql{$nl}VALUES $values";
 	}

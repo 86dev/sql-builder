@@ -7,6 +7,11 @@ use SQLBuilder\Enums\ConditionType;
 
 class ConditionTest extends TestCase
 {
+	public function testKeepNull()
+	{
+		$this->assertEquals("`name` = NULL", Condition::eq('name', null)->keep_null()->parse_query());
+	}
+
 	public function testStringEq()
 	{
 		$this->assertEquals("`name` = 'test'", Condition::eq('name', 'test')->parse_query());

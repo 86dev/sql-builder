@@ -108,6 +108,15 @@ class ConditionTest extends TestCase
 		])->parse_query());
 	}
 
+	public function testArraysBool()
+	{
+		$this->assertEquals("(`active` = b'1' OR `id` = 0)", Conditions::create([
+			'relation' => 'OR',
+			['field' => 'active', 'values' => true],
+			['field' => 'id', 'values' => 0]
+		])->parse_query());
+	}
+
 	public function testArraysWithoutRelation()
 	{
 		$this->assertEquals("(`name` = 'test' AND `id` = 1)", Conditions::create([

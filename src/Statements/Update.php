@@ -165,9 +165,9 @@ class Update extends Query
 		foreach ($this->_values as $value)
 		{
 			if (is_a($value, Condition::class))
-				$values[] = $value->parse_query();
+				$values[] = $value->keep_null()->parse_query();
 			else if (is_array($value))
-				$values[] = Condition::fromArray($value)->parse_query();
+				$values[] = Condition::fromArray($value)->keep_null()->parse_query();
 			else
 				$values[] = $value;
 		}

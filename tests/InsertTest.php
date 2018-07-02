@@ -8,8 +8,8 @@ class InsertTest extends TestCase
 {
 	public function testInsert()
 	{
-		$this->assertEquals("INSERT INTO `users` (`string`, `bool`, `int`, `double`) VALUES ('a', b'1', 1, 3.5)",
-			SQL::insert()->table('users')->fields('string', 'bool', 'int', 'double')->values(['a', true, 1, 3.5])->parse_query()
+		$this->assertEquals("INSERT INTO `users` (`string`, `bool`, `int`, `double`, `null`) VALUES ('a', b'1', 1, 3.5, NULL)",
+			SQL::insert()->table('users')->fields('string', 'bool', 'int', 'double', 'null')->values(['a', true, 1, 3.5, null])->parse_query()
 		);
 	}
 

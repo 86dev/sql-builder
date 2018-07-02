@@ -20,6 +20,13 @@ class Condition extends Query
 
 	#region Variables
 	/**
+	 * Define if null value should be kept (as in "`field` = NULL") or transformed (as in "`field` IS NULL")
+	 *
+	 * @var bool
+	 */
+	protected $_keep_null;
+
+	/**
 	 * Field name
 	 *
 	 * @var string
@@ -63,6 +70,16 @@ class Condition extends Query
 	#endregion
 
 	#region Getters
+	/**
+	 * Get if null value should be kept (as in "`field` = NULL") or transformed (as in "`field` IS NULL")
+	 *
+	 * @return boolean
+	 */
+	public function get_keep_null()
+	{
+		return $this->_keep_null;
+	}
+
 	/**
 	 * Get field
 	 *
@@ -135,6 +152,18 @@ class Condition extends Query
 	#endregion
 
 	#region Setters
+	/**
+	 * Set if null value should be kept (as in "`field` = NULL") or transformed (as in "`field` IS NULL")
+	 *
+	 * @param bool $keep_null
+	 * @return Condition
+	 */
+	public function keep_null($keep_null = true)
+	{
+		$this->_keep_null = $keep_null;
+		return $this;
+	}
+
 	/**
 	 * Set field name
 	 *
@@ -236,6 +265,7 @@ class Condition extends Query
 		$this->_operator = ConditionOperation::EQ;
 		$this->_relation = ConditionRelation::_OR;
 		$this->_do_not_use_backtick = false;
+		$this->_keep_null = false;
 		return $this;
 	}
 
@@ -255,10 +285,14 @@ class Condition extends Query
 		if (in_array($this->_operator, [ConditionOperation::LIKE, ConditionOperation::NOTLIKE]))
 			$this->_values = array_map(function($value) { return '\'%'.self::esc_like($value).'%\''; }, $this->_values);
 		else
-			$this->_values = array_map([Condition::class, 'prepare_value'], $this->_values, array_fill(0, count($this->_values), $this->_type));
+			$this->_values = array_map([Condition::class, 'prepare_value'],
+				$this->_values,
+				array_fill(0, count($this->_values), $this->_type),
+				array_fill(0, count($this->_values), $this->_keep_null)
+			);
 
 		// Check if the number of values given is working with the given operator
-		if (count($this->_values) === 0 || $this->_values === null)
+		if (!$this->_keep_null && count($this->_values) === 0 || $this->_values === null)
 		{
 			if (in_array($this->_operator, ConditionOperation::NEGATIVES))
 				$this->_operator = ConditionOperation::ISNOTNULL;
@@ -301,8 +335,8 @@ class Condition extends Query
 		{
 			$operator = $this->_operator;
 			$where = join(" $this->_relation ", array_map(function($value) use($field, $operator, $where) {
-				if ($value === null)
-					return $field.' '.(in_array($operator, ConditionOperation::NEGATIVES) ? ConditionOperation::ISNOTNULL : ConditionOperation::ISNULL);
+				if (!$this->_keep_null && $value === null)
+					return $field.' '.(in_array($this->_operator, ConditionOperation::NEGATIVES) ? ConditionOperation::ISNOTNULL : ConditionOperation::ISNULL);
 				else
 					return sprintf($where, $value);
 			}, $this->_values));
@@ -331,10 +365,10 @@ class Condition extends Query
 	 * @param string $type The value type, will be infered from real value type if null. See ConditionType for possible types.
 	 * @return string The value converted to string
 	 */
-	public static function prepare_value($value, $type = null)
+	public static function prepare_value($value, $type = null, $keep_null = false)
 	{
 		if ($value === null)
-			return $value;
+			return $keep_null ? 'NULL' : $value;
 
 		if ($type === null)
 		{
