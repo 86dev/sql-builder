@@ -17,8 +17,8 @@ class UpdateTest extends TestCase
 
 	public function testUpdateSetMany()
 	{
-		$this->assertEquals("UPDATE `users` SET `name` = 'a', `type` = 0 WHERE `id` = 1",
-			SQL::update()->table('users')->set_many(['name' => 'a', 'type' => 0])->where(Condition::eq('id', 1))->parse_query()
+		$this->assertEquals("UPDATE `users` SET `string` = 'a', `int` = 1, `float` = 3.5, `bool` = b'1', `null` = NULL WHERE `id` = 1",
+			SQL::update()->table('users')->set_many(['string' => 'a', 'int' => 1, 'float' => 3.5, 'bool' => true, 'null' => null])->where(Condition::eq('id', 1))->parse_query()
 		);
 	}
 
