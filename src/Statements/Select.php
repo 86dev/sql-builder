@@ -91,18 +91,6 @@ class Select extends Query
 	public $sql = '';
 	#endregion
 
-
-	/**
-	 * Add a join
-	 *
-	 * @param \SQLBuilder\Join $join
-	 */
-	public function join($join)
-	{
-		$this->add_join($join);
-		return $this;
-	}
-
 	/**
 	 * Reset the query
 	 *
@@ -200,6 +188,18 @@ class Select extends Query
 			$alias = $table;
 
 		$this->_from[$alias] = $table;
+		return $this;
+	}
+
+	/**
+	 * Add a join
+	 *
+	 * @param \SQLBuilder\Join $join
+	 * @return Select
+	 */
+	public function join($join)
+	{
+		$this->add_join($join);
 		return $this;
 	}
 
