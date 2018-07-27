@@ -68,6 +68,7 @@ class AlterTable extends Query
 	public function add_index(Index $index)
 	{
 		$index->action(SQLAction::ADD);
+		$index->table($this->_table);
 		$this->_queries[] = $index;
 		return $this;
 	}
@@ -80,6 +81,7 @@ class AlterTable extends Query
 	public function add_primary(Primary $primary)
 	{
 		$primary->action(SQLAction::ADD);
+		$primary->table($this->_table);
 		$this->_queries[] = $primary;
 		return $this;
 	}
@@ -92,6 +94,7 @@ class AlterTable extends Query
 	public function add_foreign(ForeignKey $foreign)
 	{
 		$foreign->action(SQLAction::ADD);
+		$foreign->table($this->_table);
 		$this->_queries[] = $foreign;
 		return $this;
 	}
