@@ -32,11 +32,13 @@ trait JoinsTrait
 	 *
 	 * @param \SQLBuilder\Join $join
 	 */
-	protected function add_join(\SQLBuilder\Join $join)
+	protected function add_join(\SQLBuilder\Join $join, $table)
 	{
 		if (!is_a($join, \SQLBuilder\Join::class))
 			throw new \UnexpectedValueException('Join must be a '.\SQLBuilder\Join::class);
-		$this->_joins[] = $join;
+		if (!is_string($table) || !$table)
+			throw new \UnexpectedValueException('Join must be associated with a valid table name.');
+		$this->_joins[$table][] = $join;
 	}
 
 	/**
@@ -55,7 +57,7 @@ trait JoinsTrait
 	 *
 	 * @return string
 	 */
-	protected function parse_query_join()
+	protected function parse_query_join($table)
 	{
 		if (!count($this->_joins))
 			return '';

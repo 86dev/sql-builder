@@ -42,6 +42,13 @@ class Select extends Query
 	protected $_from = [];
 
 	/**
+	 * Last table name or alias added
+	 *
+	 * @var string
+	 */
+	protected $_last_from = null;
+
+	/**
 	 * Where
 	 *
 	 * @var Conditions
@@ -100,6 +107,7 @@ class Select extends Query
 	{
 		$this->_select = new Fields();
 		$this->_from = [];
+		$this->_last_from = null;
 		$this->_joins = [];
 		$this->_where = new Conditions();
 		$this->_groupby = new Fields();
@@ -119,14 +127,21 @@ class Select extends Query
 	public function parse_query()
 	{
 		$nl = $this->_prettify ? "\n" : ' ';
+		$nlt = $this->_prettify ? "\n\t" : ' ';
 
 		$distinct = $this->_distinct ? 'DISTINCT ' : '';
 		$select = 'SELECT '.$distinct.$this->_select->prettify($this->_prettify)->parse_query();
 		$from = $nl.'FROM '.implode(', '.$nl, array_map(function($table, $alias) { return $this->_backtick($table).($table !== $alias ? ' AS '.$this->_backtick($alias) : '') ; }, $this->_from, array_keys($this->_from)));
 
-		$joins = implode($nl, array_map(function(Join $join) { return $join->prettify($this->_prettify)->parse_query(); }, $this->_joins));
-		if ($joins)
-			$joins = $nl.$joins;
+		$from = '';
+		foreach ($this->_from as $alias => $table)
+		{
+			if ($from) $from .= ",$nl";
+			$from .= $this->_backtick($table).($table !== $alias ? ' AS '.$this->_backtick($alias) : '');
+			if (array_key_exists($alias, $this->_joins) && count($this->_joins[$alias]))
+				$from .= $nlt.implode($nlt, array_map(function(Join $join) { return $join->prettify($this->_prettify)->parse_query(); }, $this->_joins[$alias]));
+		}
+		$from = "{$nl}FROM $from";
 
 		$where = $this->_where->prettify($this->_prettify)->parse_query();
 		if ($where)
@@ -154,7 +169,7 @@ class Select extends Query
 		if ($this->_offset !== null)
 			$offset = $nl.'OFFSET '.$this->_offset;
 
-		$this->sql = $select.$from.$joins.$where.$groupby.$having.$orderby.$limit.$offset;
+		$this->sql = $select.$from.$where.$groupby.$having.$orderby.$limit.$offset;
 		return $this->sql;
 	}
 
@@ -187,6 +202,7 @@ class Select extends Query
 		if (!$alias)
 			$alias = $table;
 
+		$this->_last_from = $alias;
 		$this->_from[$alias] = $table;
 		return $this;
 	}
@@ -195,11 +211,13 @@ class Select extends Query
 	 * Add a join
 	 *
 	 * @param \SQLBuilder\Join $join
+	 * @param string $table The table name or alias on which the join is applied. If not provided, the join will be associated with the latest table added via 'from'
 	 * @return Select
 	 */
-	public function join($join)
+	public function join(Join $join, $table = null)
 	{
-		$this->add_join($join);
+		if (!$table) $table = $this->_last_from;
+		$this->add_join($join, $table);
 		return $this;
 	}
 
