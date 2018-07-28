@@ -44,6 +44,42 @@ class SelectTest extends TestCase
 				->parse_query());
 	}
 
+	public function testSelectMultipleFromJoinWhere()
+	{
+		$this->assertEquals('SELECT `u`.`name`'
+			.' FROM `users` AS `u` INNER JOIN `users_roles` AS `ur` ON `ur`.`user_id` = `u`.`id`,'
+			.' `roles` AS `r` INNER JOIN `roles_capabilities` AS `rc` ON `rc`.`role_id` = `r`.`id`'
+			.' WHERE (`ur`.`role_id` = 1 AND `rc`.`role_id` = 1)',
+			SQL::select()
+				->select('name', 'u')
+				->from('users', 'u')
+				->join(Join::inner_join('users_roles', 'ur')->on(Condition::column('ur.user_id', 'u.id')))
+				->from('roles', 'r')
+				->join(Join::inner_join('roles_capabilities', 'rc')->on(Condition::column('rc.role_id', 'r.id')))
+				->where(['ur.role_id' => 1])
+				->where(['rc.role_id' => 1])
+				->parse_query());
+	}
+
+	public function testSelectAddJoinLater()
+	{
+		$sql = SQL::select()
+			->select('name', 'u')
+			->from('users', 'u')
+			->from('roles', 'r');
+
+		$sql->join(Join::inner_join('users_roles', 'ur')->on(Condition::column('ur.user_id', 'u.id')), 'u')
+			->where(['ur.role_id' => 1]);
+		$sql->join(Join::inner_join('roles_capabilities', 'rc')->on(Condition::column('rc.role_id', 'r.id')))
+			->where(['rc.role_id' => 1]);
+
+		$this->assertEquals(
+			'SELECT `u`.`name` FROM `users` AS `u` INNER JOIN `users_roles` AS `ur` ON `ur`.`user_id` = `u`.`id`,'
+			.' `roles` AS `r` INNER JOIN `roles_capabilities` AS `rc` ON `rc`.`role_id` = `r`.`id`'
+			.' WHERE (`ur`.`role_id` = 1 AND `rc`.`role_id` = 1)',
+			$sql->parse_query());
+	}
+
 	public function testSelectFromWhereGroupby()
 	{
 		$this->assertEquals('SELECT `name` FROM `users` WHERE `id` = 1 GROUP BY `name`',
