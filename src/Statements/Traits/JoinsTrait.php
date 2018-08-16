@@ -64,6 +64,8 @@ trait JoinsTrait
 
 		$nl = $this->_prettify ? "\n" : '';
 		$nlt = $this->_prettify ? "\n\t" : ' ';
-		return $nlt.implode($nlt, array_map(function(\SQLBuilder\Join $join) { return $join->prettify($this->_prettify)->parse_query(); }, $this->_joins)).$nl;
+
+		$joins = call_user_func_array('array_merge', $this->_joins);
+		return $nlt.implode($nlt, array_map(function(\SQLBuilder\Join $join) { return $join->prettify($this->_prettify)->parse_query(); }, $joins)).$nl;
 	}
 }

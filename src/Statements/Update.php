@@ -42,7 +42,7 @@ class Update extends Query
 	 */
 	public function join($join)
 	{
-		$this->add_join($join);
+		$this->add_join($join, $this->_table);
 		return $this;
 	}
 
@@ -172,7 +172,7 @@ class Update extends Query
 				$values[] = $value;
 		}
 		$values = implode(",$nlt", $values);
-		$join = $this->parse_query_join().$nl;
+		$join = $this->parse_query_join($this->_table).$nl;
 		$where = count($this->_conditions) ? $nl.'WHERE '.$this->parse_query_conditions() : '';
 
 		return "UPDATE {$this->parse_query_table()}{$this->parse_query_alias()}{$join}SET $values$where";

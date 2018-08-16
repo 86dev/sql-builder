@@ -19,6 +19,7 @@ class Delete extends Query
 	protected $_values;
 	protected $_from;
 	protected $_using;
+	protected $_last_using;
 	#endregion
 
 	#region Getters
@@ -46,11 +47,13 @@ class Delete extends Query
 	 * Add a join
 	 *
 	 * @param \SQLBuilder\Join $join
-	 * @return Delete
+	 * @param string $table The table name or alias on which the join is applied. If not provided, the join will be associated with the latest table added via 'using'
+	 * @return Select
 	 */
-	public function join(Join $join)
+	public function join(Join $join, $table = null)
 	{
-		$this->add_join($join);
+		if (!$table) $table = $this->_last_using;
+		$this->add_join($join, $table);
 		return $this;
 	}
 
@@ -69,15 +72,17 @@ class Delete extends Query
 	/**
 	 * Table to use for delete
 	 *
-	 * @param string $table
-	 * @param string $alias
+	 * @param string $table The table name
+	 * @param string $alias The table alias
 	 * @return Delete
 	 */
 	public function using($table, $alias = '')
 	{
 		if (!$alias)
 			$alias = $table;
+
 		$this->_using[$alias] = $table;
+		$this->_last_using = $alias;
 		return $this;
 	}
 
@@ -118,13 +123,22 @@ class Delete extends Query
 		$nl = $this->_prettify ? "\n" : ' ';
 		$nlt = $this->_prettify ? "\n\t" : ' ';
 		$from = implode(",$nlt", array_map([$this, '_backtick'], $this->_from));
-		$using = implode(",$nlt", array_map(function ($alias, $table) {return $this->_backtick($table).($alias !== $table ? ' AS '.$this->_backtick($alias) : ''); }, array_keys($this->_using), $this->_using));
+		// $using = implode(",$nlt", array_map(function ($alias, $table) {return $this->_backtick($table).($alias !== $table ? ' AS '.$this->_backtick($alias) : ''); }, array_keys($this->_using), $this->_using));
+
+		$using = '';
+		foreach ($this->_using as $alias => $table)
+		{
+			if ($using) $using .= ",$nl";
+			$using .= $this->_backtick($table).($table !== $alias ? ' AS '.$this->_backtick($alias) : '');
+			if (array_key_exists($alias, $this->_joins) && count($this->_joins[$alias]))
+				$using .= $nlt.implode($nlt, array_map(function(Join $join) { return $join->prettify($this->_prettify)->parse_query(); }, $this->_joins[$alias]));
+		}
 		if ($using)
 			$using = $nl.'USING '.$using;
-		$join = implode($nlt, array_map(function(Join $join) use($nl) { return $nl.$join->parse_query(); }, $this->_joins));
+
 		$where = count($this->_conditions) ? $nl.'WHERE '.$this->parse_query_conditions() : '';
 
-		return "DELETE FROM $from$using$join$where";
+		return "DELETE FROM $from$using$where";
 	}
 
 	/**
