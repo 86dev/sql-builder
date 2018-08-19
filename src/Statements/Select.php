@@ -298,6 +298,18 @@ class Select extends Query
 	}
 
 	/**
+	 * Set the query DISTINCT clause
+	 *
+	 * @param bool $distinct if the query's results should be distinct
+	 * @return Select
+	 */
+	public function distinct($distinct = true)
+	{
+		$this->_distinct = $distinct;
+		return $this;
+	}
+
+	/**
 	 * Create a new SELECT query
 	 *
 	 * @return Select
