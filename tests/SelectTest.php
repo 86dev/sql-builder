@@ -19,6 +19,12 @@ class SelectTest extends TestCase
 			SQL::select()->select('name')->from('users')->where(['id' => 1])->parse_query());
 	}
 
+	public function testSelectDistinctFromWhere()
+	{
+		$this->assertEquals('SELECT DISTINCT `name` FROM `users` WHERE `id` = 1',
+			SQL::select()->distinct()->select('name')->from('users')->where(['id' => 1])->parse_query());
+	}
+
 	public function testSelectFromWhereComplex()
 	{
 		$this->assertEquals('SELECT `name` FROM `users` WHERE (`id` = 1 OR (`login` LIKE \'%test%\' OR `login` LIKE \'%truc%\'))',
