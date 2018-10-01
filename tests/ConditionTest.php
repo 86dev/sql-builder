@@ -178,6 +178,11 @@ class ConditionTest extends TestCase
 		$this->assertEquals("`name` NOT IN (1.5, 2.5, 10.9)", Condition::not_in('name', [1.5, 2.5, 10.9])->parse_query());
 	}
 
+	public function testConditionColumn()
+	{
+		$this->assertEquals("`name` = `p`.`id`", Condition::column('name', 'p.id')->parse_query());
+	}
+
 	public function testPrepareValueString()
 	{
 		$this->assertEquals("'a'", Condition::prepare_value('a'));
