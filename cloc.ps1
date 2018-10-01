@@ -1,0 +1,1 @@
+cloc --exclude-dir="node_modules,vendor,.vscode" --not-match-f=".*\.min\..*$" --sql=1 --sql-project=sqlbuilder --sql-append . | sqlite3 e:\dev\code.sqlite3

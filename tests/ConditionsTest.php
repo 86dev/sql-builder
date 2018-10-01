@@ -94,6 +94,18 @@ class ConditionTest extends TestCase
 		])->parse_query());
 	}
 
+	public function testNestedConditionsWithColumn()
+	{
+		$this->assertEquals("(`k`.`id` = 1 AND (`k`.`status` = `p`.`status` OR `k`.`active` = `p`.`active`))", Conditions::create([
+			Condition::eq("k.id", 1),
+			[
+				'relation' => 'OR',
+				Condition::column('k.status', 'p.status'),
+				Condition::column('k.active', 'p.active')
+			]
+		])->parse_query());
+	}
+
 	public function testArray()
 	{
 		$this->assertEquals("`name` = 'test'", Conditions::create(['field' => 'name', 'values' => 'test'])->parse_query());
