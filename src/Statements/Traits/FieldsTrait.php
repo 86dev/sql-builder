@@ -40,7 +40,7 @@ trait FieldsTrait
 	{
 		if (is_array($field))
 		{
-			return $this->fields($field);
+			return $this->set_fields($field, $table);
 		}
 
 		$this->_fields[$alias ?: ($table ? "$table." : '').$field] = ['field' => $field, 'table' => $table, 'alias' => $alias, 'do_not_use_backtick' => $do_not_use_backtick];
