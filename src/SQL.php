@@ -37,34 +37,36 @@ abstract class SQL
 	/**
 	 * Build a CREATE TABLE query
 	 *
-	 * @param string $name
+	 * @param string $table
+	 * @param boolean $ifnotexists Create the table only if it does not exist
 	 * @return Statements\CreateTable
 	 */
-	public static function create_table($name)
+	public static function create_table($table, $ifnotexists = false)
 	{
-		return Statements\CreateTable::create()->name($name);
+		return Statements\CreateTable::create($table, $ifnotexists);
 	}
 
 	/**
 	 * Build a ALTER TABLE query
 	 *
-	 * @param string $name
+	 * @param string $table
 	 * @return Statements\AlterTable
 	 */
-	public static function alter_table($name)
+	public static function alter_table($table)
 	{
-		return Statements\AlterTable::create()->table($name);
+		return Statements\AlterTable::create($table);
 	}
 
 	/**
 	 * Build a DROP TABLE query
 	 *
-	 * @param string $name
+	 * @param string $table Table name
+	 * @param boolean $ifexists Delete the table only if it exists
 	 * @return Statements\DropTable
 	 */
-	public static function drop_table($name)
+	public static function drop_table($table, $ifexists = false)
 	{
-		return Statements\DropTable::create()->name($name);
+		return Statements\DropTable::create($table, $ifexists);
 	}
 
 	/**
