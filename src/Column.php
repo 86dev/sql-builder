@@ -107,7 +107,7 @@ class Column extends Statements\Query
 	protected $_values;
 
 	protected $_after;
-	protected $_before;
+	protected $_first;
 	protected $_new_name;
 	#endregion
 
@@ -151,7 +151,7 @@ class Column extends Statements\Query
 		$this->_default_validator = null;
 		$this->_values = null;
 		$this->_after = null;
-		$this->_before = null;
+		$this->_first = false;
 		$this->_new_name = null;
 	}
 
@@ -205,7 +205,7 @@ class Column extends Statements\Query
 		}
 
 		$after = $this->_after ? ' AFTER '.$this->_backtick($this->_after) : '';
-		$before = $this->_before ? ' BEFORE '.$this->_backtick($this->_before) : '';
+		$first = $this->_first ? ' FIRST' : '';
 		$new_name = '';
 		if ($this->_action === SQLAction::CHANGE) // new name is mandatory for CHANGE statement
 			$new_name = ' '.($this->_new_name ? $this->_backtick($this->_new_name) : $this->parse_query_name());
@@ -224,7 +224,7 @@ class Column extends Statements\Query
 			.($this->_primary ? ' PRIMARY KEY' : '')
 			.$this->parse_query_foreignkey()
 			.$after
-			.$before);
+			.$first);
 	}
 
 	/**
@@ -553,21 +553,21 @@ class Column extends Statements\Query
 	 */
 	public function after($field_name)
 	{
-		$this->_before = null;
+		$this->_first = false;
 		$this->_after = $field_name;
 		return $this;
 	}
 
 	/**
-	 * Define before which field this field should be set
+	 * Define if this field should be set first
 	 *
 	 * @param string $field_name
 	 * @return Column
 	 */
-	public function before($field_name)
+	public function first($value = true)
 	{
 		$this->_after = null;
-		$this->_before = $field_name;
+		$this->_first = $value;
 		return $this;
 	}
 	#endregion
