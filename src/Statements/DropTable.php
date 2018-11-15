@@ -59,4 +59,16 @@ class DropTable
 			.($this->_ifnotexists ? "IF EXISTS " : '')
 			.$this->parse_query_table();
 	}
+
+	/**
+	 * Create a new DROP TABLE statement
+	 *
+	 * @param string $table Table name
+	 * @param bool $ifexists Delete the table only if it exists
+	 * @return CreateTable
+	 */
+	public static function create($table, $ifexists = false)
+	{
+		return (new static())->table($table)->ifexists($ifexists);
+	}
 }
