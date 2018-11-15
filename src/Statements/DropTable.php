@@ -8,7 +8,7 @@ use SQLBuilder\SQL;
  * @version 1.0
  * @author 86Dev
  */
-class DropTable
+class DropTable extends Query
 {
 	use Traits\TableTrait;
 	use Traits\IfNotExistsTrait;
