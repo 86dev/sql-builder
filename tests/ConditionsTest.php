@@ -7,7 +7,7 @@ use SQLBuilder\Enums\ConditionType;
 use SQLBuilder\Statements\Conditions;
 use SQLBuilder\Enums\ConditionOperation;
 
-class ConditionTest extends TestCase
+class ConditionsTest extends TestCase
 {
 	public function testString()
 	{
