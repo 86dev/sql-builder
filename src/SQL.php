@@ -74,11 +74,11 @@ abstract class SQL
 	 *
 	 * @param string $name
 	 * @param string $table
-	 * @return Statements\IndexCommand
+	 * @return IndexCommand
 	 */
 	public static function drop_index($name, $table)
 	{
-		return Statements\IndexCommand::create()->action(SQLAction::DROP)->name($name)->table($table);
+		return IndexCommand::create()->action(SQLAction::DROP)->name($name)->table($table);
 	}
 
 	/**
