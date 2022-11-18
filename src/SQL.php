@@ -14,8 +14,8 @@ abstract class SQL
 	/**
 	 * Surround a name with bactick.
 	 * If name contains a table name or alias (eg: 'a.name'), the table and name will be surrounded by backticks.
-	 * @param \string $name
-	 * @return \string
+	 * @param string $name
+	 * @return string
 	 */
 	public static function backtick($field)
 	{
@@ -25,8 +25,8 @@ abstract class SQL
 
 	/**
 	 * Surround a value with quote and add slashes
-	 * @param \string $value
-	 * @return \string
+	 * @param string $value
+	 * @return string
 	 */
 	public static function quote($value)
 	{

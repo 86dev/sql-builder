@@ -13,14 +13,14 @@ trait TableTrait
 	/**
 	 * Table name
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_table;
 
 	/**
 	 * Get table name
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_table()
 	{
@@ -30,7 +30,7 @@ trait TableTrait
 	/**
 	 * Set table name
 	 *
-	 * @param \string $table
+	 * @param string $table
 	 */
 	protected function set_table($table)
 	{

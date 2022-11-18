@@ -25,7 +25,7 @@ class Delete extends Query
 	#region Getters
 	/**
 	 * Get delete from
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_from()
 	{
@@ -34,7 +34,7 @@ class Delete extends Query
 
 	/**
 	 * Get delete using
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_using()
 	{

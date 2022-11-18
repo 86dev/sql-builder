@@ -16,7 +16,7 @@ class DropTable extends Query
 	/**
 	 * Set table name
 	 *
-	 * @param \string $table
+	 * @param string $table
 	 * @return DropTable
 	 */
 	public function table($table)
@@ -28,7 +28,7 @@ class DropTable extends Query
 	/**
 	 * Set if the query should stop if the element does not exist
 	 *
-	 * @param \bool $ifexists
+	 * @param bool $ifexists
 	 * @return DropTable
 	 */
 	public function ifexists($ifexists = true)
@@ -51,7 +51,7 @@ class DropTable extends Query
 	/**
 	 * Get the query string
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function parse_query()
 	{

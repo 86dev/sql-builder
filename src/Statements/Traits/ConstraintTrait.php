@@ -12,14 +12,14 @@ trait ConstraintTrait
 {
 	/**
 	 * Index constraint
-	 * @var \string
+	 * @var string
 	 */
 	protected $_constraint;
 
 	/**
 	 * Get index constraint
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_constraint()
 	{
@@ -29,14 +29,14 @@ trait ConstraintTrait
 	/**
 	 * Set index constraint
 	 *
-	 * @param \string $constraint
+	 * @param string $constraint
 	 */
 	public abstract function constraint($constraint);
 
 	/**
 	 * Set index constraint
 	 *
-	 * @param \string $constraint
+	 * @param string $constraint
 	 */
 	protected function set_constraint($constraint)
 	{

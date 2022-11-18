@@ -15,7 +15,7 @@ class Conditions extends Query
 	/**
 	 * Set conditions
 	 *
-	 * @param \string[] $conditions
+	 * @param string[] $conditions
 	 * @return Conditions
 	 */
 	public function conditions($conditions)
@@ -48,7 +48,7 @@ class Conditions extends Query
 	/**
 	 * Create a new condition
 	 *
-	 * @param \string[] $conditions
+	 * @param string[] $conditions
 	 * @return void
 	 */
 	public static function create($conditions = null)

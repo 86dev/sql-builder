@@ -18,13 +18,13 @@ class Join extends Statements\Query
 	#region Variables
 	/**
 	 * Join direction
-	 * @var \string
+	 * @var string
 	 */
 	protected $_direction;
 
 	/**
 	 * Join type
-	 * @var \string
+	 * @var string
 	 */
 	protected $_type;
 	#endregion
@@ -32,7 +32,7 @@ class Join extends Statements\Query
 	#region Getters
 	/**
 	 * Get join direction
-	 * @return \string
+	 * @return string
 	 */
 	public function get_direction()
 	{
@@ -41,7 +41,7 @@ class Join extends Statements\Query
 
 	/**
 	 * Get join type
-	 * @return \string
+	 * @return string
 	 */
 	public function get_type()
 	{
@@ -196,8 +196,8 @@ class Join extends Statements\Query
 
 	/**
 	 * Constructor allowing to specify columns and action
-	 * @param \string[] $columns
-	 * @param \string $action
+	 * @param string[] $columns
+	 * @param string $action
 	 */
 	public function __construct($table = null, $alias = null)
 	{
@@ -221,7 +221,7 @@ class Join extends Statements\Query
 
 	/**
 	 * Get the query SQL
-	 * @return \string
+	 * @return string
 	 */
 	public function parse_query()
 	{

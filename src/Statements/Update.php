@@ -25,7 +25,7 @@ class Update extends Query
 	/**
 	 * Get update values
 	 *
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_values()
 	{

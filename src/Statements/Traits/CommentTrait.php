@@ -12,14 +12,14 @@ trait CommentTrait
 {
 	/**
 	 * Index comment
-	 * @var \string
+	 * @var string
 	 */
 	protected $_comment;
 
 	/**
 	 * Get index comment
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_comment()
 	{
@@ -29,7 +29,7 @@ trait CommentTrait
 	/**
 	 * Set index comment
 	 *
-	 * @param \string $comment
+	 * @param string $comment
 	 */
 	protected function set_comment($comment)
 	{

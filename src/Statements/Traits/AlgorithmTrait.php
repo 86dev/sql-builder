@@ -14,14 +14,14 @@ trait AlgorithmTrait
 	/**
 	 * Index algorithm
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_algorithm;
 
 	/**
 	 * Get index algorithm
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_algorithm()
 	{
@@ -31,7 +31,7 @@ trait AlgorithmTrait
 	/**
 	 * Set index algorithm, see IndexAlgorithm for available values
 	 *
-	 * @param \string $algorithm
+	 * @param string $algorithm
 	 */
 	protected function set_algorithm($algorithm)
 	{

@@ -13,14 +13,14 @@ trait FullTextTrait
 	/**
 	 * Indicate whether the value must be fulltext
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_fulltext;
 
 	/**
 	 * Indicate whether the value must be fulltext
 	 *
-	 * @return \bool
+	 * @return bool
 	 */
 	public function get_fulltext()
 	{
@@ -30,7 +30,7 @@ trait FullTextTrait
 	/**
 	 * Set whether the value must be fulltext
 	 *
-	 * @param \bool $fulltext
+	 * @param bool $fulltext
 	 */
 	protected function set_fulltext($fulltext = true)
 	{

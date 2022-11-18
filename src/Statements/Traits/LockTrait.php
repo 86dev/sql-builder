@@ -14,14 +14,14 @@ trait LockTrait
 	/**
 	 * Index lock, see IndexLock for available values
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_lock;
 
 	/**
 	 * Get index lock
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_lock()
 	{
@@ -31,7 +31,7 @@ trait LockTrait
 	/**
 	 * Set index lock, see IndexLock for available values
 	 *
-	 * @param \string $lock
+	 * @param string $lock
 	 */
 	protected function set_lock($lock)
 	{

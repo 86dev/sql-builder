@@ -19,8 +19,8 @@ class Index extends Statements\Query
 
 	/**
 	 * Constructor allowing to specify columns and action
-	 * @param \string[] $columns
-	 * @param \string $action
+	 * @param string[] $columns
+	 * @param string $action
 	 */
 	public function __construct($columns = null, $action = null)
 	{

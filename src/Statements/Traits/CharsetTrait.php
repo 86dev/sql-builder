@@ -13,14 +13,14 @@ trait CharsetTrait
 	/**
 	 * Charset
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_charset;
 
 	/**
 	 * Get charset
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_charset()
 	{
@@ -30,7 +30,7 @@ trait CharsetTrait
 	/**
 	 * Set charset
 	 *
-	 * @param \string $charset
+	 * @param string $charset
 	 */
 	protected function set_charset($charset)
 	{

@@ -13,13 +13,13 @@ trait AliasTrait
 	/**
 	 * Alias
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_alias;
 
 	/**
 	 * Get alias
-	 * @return \string
+	 * @return string
 	 */
 	public function get_alias()
 	{
@@ -29,7 +29,7 @@ trait AliasTrait
 	/**
 	 * Set alias
 	 *
-	 * @param \string $alias
+	 * @param string $alias
 	 */
 	protected function set_alias($alias)
 	{

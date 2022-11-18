@@ -30,15 +30,15 @@ abstract class Query
 	/**
 	 * Get the query SQL
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public abstract function parse_query();
 
 	/**
 	 * Surround a name with bactick. Shortcut function to SQLHelper::backtick
 	 *
-	 * @param \string $name
-	 * @return \string
+	 * @param string $name
+	 * @return string
 	 */
 	protected function _backtick($name)
 	{
@@ -48,8 +48,8 @@ abstract class Query
 	/**
 	 * Surround a value with quote. Shortcut function to SQLHelper::quote
 	 *
-	 * @param \string $value
-	 * @return \string
+	 * @param string $value
+	 * @return string
 	 */
 	protected function _quote($value)
 	{
@@ -59,7 +59,7 @@ abstract class Query
 	/**
 	 * Indicates if the SQL returned should be prettified
 	 *
-	 * @param \bool $prettify
+	 * @param bool $prettify
 	 * @return static
 	 */
 	public function prettify($prettify = true)

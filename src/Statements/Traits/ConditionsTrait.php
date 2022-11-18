@@ -16,14 +16,14 @@ trait ConditionsTrait
 	/**
 	 * Conditions
 	 *
-	 * @var \string[]
+	 * @var string[]
 	 */
 	protected $_conditions;
 
 	/**
 	 * Get conditions
 	 *
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_conditions()
 	{
@@ -74,8 +74,8 @@ trait ConditionsTrait
 	/**
 	 * Walk through the conditions array to generate a WHERE/ON clause
 	 *
-	 * @param \string[] $conditions
-	 * @return \string
+	 * @param string[] $conditions
+	 * @return string
 	 */
 	protected function conditions_walker($conditions)
 	{

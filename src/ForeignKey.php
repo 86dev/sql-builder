@@ -185,7 +185,7 @@ class ForeignKey extends Statements\Query
 	/**
 	 * Get the query SQL
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function parse_query()
 	{

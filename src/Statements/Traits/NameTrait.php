@@ -13,14 +13,14 @@ trait NameTrait
 	/**
 	 * Name
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_name;
 
 	/**
 	 * Get name
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_name()
 	{
@@ -30,7 +30,7 @@ trait NameTrait
 	/**
 	 * Set name
 	 *
-	 * @param \string $name
+	 * @param string $name
 	 */
 	protected function set_name($name)
 	{

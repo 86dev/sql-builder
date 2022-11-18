@@ -13,14 +13,14 @@ trait UniqueTrait
 	/**
 	 * Indicate whether the value must be unique
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_unique;
 
 	/**
 	 * Indicate whether the value must be unique
 	 *
-	 * @return \bool
+	 * @return bool
 	 */
 	public function get_unique()
 	{
@@ -30,7 +30,7 @@ trait UniqueTrait
 	/**
 	 * Set whether the value must be unique
 	 *
-	 * @param \bool $unique
+	 * @param bool $unique
 	 */
 	protected function set_unique($unique = true)
 	{

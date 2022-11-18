@@ -13,21 +13,21 @@ trait ActionTrait
 {
 	/**
 	 * Action
-	 * @var \string
+	 * @var string
 	 */
 	protected $_action;
 
 	/**
 	 * Indicates if an empty action is allowed
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_allow_empty_action = true;
 
 	/**
 	 * Get action
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_action()
 	{
@@ -37,7 +37,7 @@ trait ActionTrait
 	/**
 	 * Set action
 	 *
-	 * @param \string $action
+	 * @param string $action
 	 * @throws \UnexpectedValueException
 	 */
 	protected function set_action($action)

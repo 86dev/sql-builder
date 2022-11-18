@@ -21,7 +21,7 @@ class Insert extends InsertBase
 
 	/**
 	 * Get insert values
-	 * @return \string
+	 * @return string
 	 */
 	public function get_values()
 	{
@@ -71,7 +71,7 @@ class Insert extends InsertBase
 
 	/**
 	 * Set whether the value must be ignored if an error occured
-	 * @param \bool $ignore
+	 * @param bool $ignore
 	 * @return Insert
 	 */
 	public function ignore($ignore = true)
@@ -82,7 +82,7 @@ class Insert extends InsertBase
 
 	/**
 	 * Add an array of values to insert. Call this method multiple times to set multiple VALUES statement or call Insert::multiple_values to set all VALUES statement at once.
-	 * @param \string[]|array $values Values to insert for one row
+	 * @param string[]|array $values Values to insert for one row
 	 * @return Insert
 	 */
 	public function values($values)
