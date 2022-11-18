@@ -77,7 +77,7 @@ trait ActionTrait
 	{
 		if((!empty($action) || !$this->_allow_empty_action) && !SQLAction::isValidValue($action))
 		{
-			$actions = defined('self::ACTIONS') ? self::ACTIONS : SQLAction::values();
+			$actions = defined('self::ACTIONS') ? constant('self::ACTIONS') : SQLAction::values();
 			$actions = join(', ', array_map([$this, '_quote'], $actions));
 			if (!$this->_allow_empty_action)
 				$actions .= ' or empty';
