@@ -76,10 +76,10 @@ class CreateTable extends Query
 	/**
 	 * Add an index
 	 *
-	 * @param Query $index
+	 * @param Index|Primary|ForeignKey $index
 	 * @return CreateTable
 	 */
-	public function add_index(Query $index)
+	public function add_index($index)
 	{
 		$index->action(null);
 		$index->table($this->_name);
