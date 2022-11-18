@@ -1,6 +1,9 @@
 <?php
 namespace SQLBuilder\Statements;
 
+use SQLBuilder\Column;
+use SQLBuilder\Index;
+
 /**
  * Command statement builder
  *
@@ -11,6 +14,10 @@ namespace SQLBuilder\Statements;
 class Command extends Query
 {
 	#region Constants
+	const ACTION_ALTER = 'ALTER';
+	const ACTION_CREATE = 'CREATE';
+	const ACTION_DROP = 'DROP';
+	const ACTION_RENAME = 'RENAME';
 	const ACTIONS = [self::ACTION_ALTER, self::ACTION_CREATE, self::ACTION_DROP, self::ACTION_RENAME];
 
 	const TYPE_TABLE = 'TABLE';
