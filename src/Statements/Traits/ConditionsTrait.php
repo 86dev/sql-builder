@@ -39,15 +39,20 @@ trait ConditionsTrait
 	{
 		if ($conditions === null) return;
 
-		if (!is_array($conditions) || array_key_exists('field', $conditions))
+		if (!is_array($conditions) || array_key_exists('field', $conditions)) {
 			$conditions = [$conditions];
-		foreach ($conditions as $key => $condition)
-		{
+		}
+
+		foreach ($conditions as $key => $condition) {
 			if (is_string($key) && $key !== 'relation')
 				$conditions[$key] = Condition::eq($key, $condition);
 		}
 
-		$this->_conditions = array_merge($this->_conditions, $conditions);
+		if (array_key_exists('relation', $conditions)) {
+			$this->_conditions[] = $conditions;
+		} else {
+			$this->_conditions[] = array_merge($this->_conditions, $conditions);
+		}
 	}
 
 	/**
@@ -74,7 +79,7 @@ trait ConditionsTrait
 	/**
 	 * Walk through the conditions array to generate a WHERE/ON clause
 	 *
-	 * @param string[] $conditions
+	 * @param (string|Condition|(string|Condition)[])[] $conditions
 	 * @return string
 	 */
 	protected function conditions_walker($conditions)
