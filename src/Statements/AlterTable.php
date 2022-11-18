@@ -28,10 +28,8 @@ class AlterTable extends Query
 	#region Setters
 	/**
 	 * Set the table name
-	 *
-	 * @return AlterTable
 	 */
-	public function table($table)
+	public function table($table): self
 	{
 		$this->set_table($table);
 		return $this;
@@ -39,10 +37,8 @@ class AlterTable extends Query
 
 	/**
 	 * Set the table comment
-	 *
-	 * @return AlterTable
 	 */
-	public function comment($comment)
+	public function comment($comment): self
 	{
 		$this->set_comment($comment);
 		return $this;
@@ -50,10 +46,8 @@ class AlterTable extends Query
 
 	/**
 	 * Add a column
-	 *
-	 * @return AlterTable
 	 */
-	public function add_column(Column $column)
+	public function add_column(Column $column): self
 	{
 		$column->action(SQLAction::ADD);
 		$this->_queries[] = $column;
@@ -62,10 +56,8 @@ class AlterTable extends Query
 
 	/**
 	 * Add an index
-	 *
-	 * @return AlterTable
 	 */
-	public function add_index(Index $index)
+	public function add_index(Index $index): self
 	{
 		$index->action(SQLAction::ADD);
 		$index->table($this->_table);
@@ -75,10 +67,8 @@ class AlterTable extends Query
 
 	/**
 	 * Add a primary key
-	 *
-	 * @return AlterTable
 	 */
-	public function add_primary(Primary $primary)
+	public function add_primary(Primary $primary): self
 	{
 		$primary->action(SQLAction::ADD);
 		$primary->table($this->_table);
@@ -88,10 +78,8 @@ class AlterTable extends Query
 
 	/**
 	 * Add a foreign key
-	 *
-	 * @return AlterTable
 	 */
-	public function add_foreign(ForeignKey $foreign)
+	public function add_foreign(ForeignKey $foreign): self
 	{
 		$foreign->action(SQLAction::ADD);
 		$foreign->table($this->_table);
@@ -101,10 +89,8 @@ class AlterTable extends Query
 
 	/**
 	 * Drop the column
-	 *
-	 * @return AlterTable
 	 */
-	public function drop_column(Column $column)
+	public function drop_column(Column $column): self
 	{
 		$column->action(SQLAction::DROP);
 		$this->_queries[] = $column;
@@ -113,10 +99,8 @@ class AlterTable extends Query
 
 	/**
 	 * Drop an index
-	 *
-	 * @return AlterTable
 	 */
-	public function drop_index(Index $index)
+	public function drop_index(Index $index): self
 	{
 		$index->action(SQLAction::DROP);
 		$this->_queries[] = $index;
@@ -125,10 +109,8 @@ class AlterTable extends Query
 
 	/**
 	 * Drop the primary key
-	 *
-	 * @return AlterTable
 	 */
-	public function drop_primary()
+	public function drop_primary(): self
 	{
 		$this->_queries[] = Primary::create()->action(SQLAction::DROP);
 		return $this;
@@ -136,10 +118,8 @@ class AlterTable extends Query
 
 	/**
 	 * Drop a foreign key
-	 *
-	 * @return AlterTable
 	 */
-	public function drop_foreign(ForeignKey $foreign)
+	public function drop_foreign(ForeignKey $foreign): self
 	{
 		$foreign->action(SQLAction::DROP);
 		$this->_queries[] = $foreign;
@@ -148,10 +128,8 @@ class AlterTable extends Query
 
 	/**
 	 * Change a column
-	 *
-	 * @return AlterTable
 	 */
-	public function change_column(Column $column)
+	public function change_column(Column $column): self
 	{
 		$column->action(SQLAction::CHANGE);
 		$this->_queries[] = $column;
@@ -160,10 +138,8 @@ class AlterTable extends Query
 
 	/**
 	 * Modify a column
-	 *
-	 * @return AlterTable
 	 */
-	public function modify_column(Column $column)
+	public function modify_column(Column $column): self
 	{
 		$column->action(SQLAction::MODIFY);
 		$this->_queries[] = $column;
@@ -172,10 +148,8 @@ class AlterTable extends Query
 
 	/**
 	 * Rename the table
-	 *
-	 * @return AlterTable
 	 */
-	public function rename_table($new_name)
+	public function rename_table($new_name): self
 	{
 		$this->_new_name = $new_name;
 		return $this;
@@ -183,10 +157,8 @@ class AlterTable extends Query
 
 	/**
 	 * Rename an index
-	 *
-	 * @return AlterTable
 	 */
-	public function rename_index($index_name, $new_index_name)
+	public function rename_index($index_name, $new_index_name): self
 	{
 		$this->_new_index_name[$index_name] = $new_index_name;
 		return $this;
@@ -195,10 +167,8 @@ class AlterTable extends Query
 
 	/**
 	 * Reset the query
-	 *
-	 * @return AlterTable
 	 */
-	public function new_query()
+	public function new_query(): self
 	{
 		$this->new_query_table();
 		$this->new_query_comment();
@@ -241,10 +211,8 @@ class AlterTable extends Query
 
 	/**
 	 * Create a new ALTER TABLE statement
-	 *
-	 * @return AlterTable
 	 */
-	public static function create($table = null)
+	public static function create($table = null): self
 	{
 		return (new static())->table($table);
 	}
