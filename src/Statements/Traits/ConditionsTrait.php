@@ -3,7 +3,6 @@
 namespace SQLBuilder\Statements\Traits;
 use SQLBuilder\Condition;
 use SQLBuilder\Enums\ConditionRelation;
-use SQLBuilder\Enums\ConditionOperation;
 
 /**
  * Define conditions properties and behavior
@@ -16,14 +15,14 @@ trait ConditionsTrait
 	/**
 	 * Conditions
 	 *
-	 * @var \string[]
+	 * @var (string|Condition)[]
 	 */
 	protected $_conditions;
 
 	/**
 	 * Get conditions
 	 *
-	 * @return \string[]
+	 * @return (string|Condition)[]
 	 */
 	public function get_conditions()
 	{
@@ -39,15 +38,20 @@ trait ConditionsTrait
 	{
 		if ($conditions === null) return;
 
-		if (!is_array($conditions) || array_key_exists('field', $conditions))
+		if (!is_array($conditions) || array_key_exists('field', $conditions)) {
 			$conditions = [$conditions];
-		foreach ($conditions as $key => $condition)
-		{
-			if (is_string($key) && $key !== 'relation')
+		}
+		foreach ($conditions as $key => $condition) {
+			if (is_string($key) && $key !== 'relation') {
 				$conditions[$key] = Condition::eq($key, $condition);
+			}
 		}
 
-		$this->_conditions = array_merge($this->_conditions, $conditions);
+		if (array_key_exists('relation', $conditions)) {
+			$this->_conditions[] = $conditions;
+		} else {
+			$this->_conditions[] = array_merge($this->_conditions, $conditions);
+		}
 	}
 
 	/**
@@ -74,8 +78,8 @@ trait ConditionsTrait
 	/**
 	 * Walk through the conditions array to generate a WHERE/ON clause
 	 *
-	 * @param \string[] $conditions
-	 * @return \string
+	 * @param (string|Condition)[] $conditions
+	 * @return string
 	 */
 	protected function conditions_walker($conditions)
 	{
