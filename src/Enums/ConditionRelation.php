@@ -12,4 +12,9 @@ abstract class ConditionRelation extends \PHPTools\Enum
 {
 	const _AND = 'AND';
 	const _OR = 'OR';
+
+	const LIST = [
+		self::_AND,
+		self::_OR,
+	];
 }

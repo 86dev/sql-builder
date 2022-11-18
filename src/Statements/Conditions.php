@@ -15,7 +15,7 @@ class Conditions extends Query
 	/**
 	 * Set conditions
 	 *
-	 * @param string[] $conditions
+	 * @param (string|Condition|(string|Condition)[])[] $conditions
 	 * @return Conditions
 	 */
 	public function conditions($conditions)
@@ -48,11 +48,15 @@ class Conditions extends Query
 	/**
 	 * Create a new condition
 	 *
-	 * @param string[] $conditions
-	 * @return void
+	 * @param (string|Condition|(string|Condition)[])[] $conditions
 	 */
-	public static function create($conditions = null)
+	public static function create($conditions = null): self
 	{
-		return (new static())->conditions($conditions);
+		$result = new static();
+		$result->conditions($conditions);
+		if (is_array($conditions) && array_key_exists('relation', $conditions)) {
+			$result->set_first_relation($conditions['relation']);
+		}
+		return $result;
 	}
 }

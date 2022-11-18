@@ -31,9 +31,23 @@ trait ConditionsTrait
 	}
 
 	/**
+	 * Set the first relation
+	 *
+	 * @param string $conditions Use {@see SQLBuilder\Enums\ConditionRelation}
+	 * @return ConditionsTrait
+	 */
+	public function set_first_relation(string $relation): self {
+		if (!in_array(trim(strtoupper($relation)), ConditionRelation::LIST)) {
+			throw new \Exception('Invalid relation');
+		}
+		$this->_conditions['relation'] = $relation;
+		return $this;
+	}
+
+	/**
 	 * Set conditions
 	 *
-	 * @param mixed $conditions
+	 * @param (string|Condition|(string|Condition)[])[] $conditions
 	 */
 	protected function set_conditions($conditions)
 	{
@@ -51,7 +65,7 @@ trait ConditionsTrait
 		if (array_key_exists('relation', $conditions)) {
 			$this->_conditions[] = $conditions;
 		} else {
-			$this->_conditions[] = array_merge($this->_conditions, $conditions);
+			$this->_conditions = array_merge($this->_conditions, $conditions);
 		}
 	}
 

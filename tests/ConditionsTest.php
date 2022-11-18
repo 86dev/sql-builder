@@ -148,6 +148,17 @@ class ConditionsTest extends TestCase
 				['field' => 'active', 'values' => 1]
 			]
 		])->parse_query());
+
+		$conditions = Conditions::create([
+			'relation' => 'OR',
+			['field' => "name", 'values' => 'test']
+		]);
+		$conditions->conditions([
+			'relation' => 'AND',
+			['field' => 'status', 'operator' => ConditionOperation::ISNULL],
+			['field' => 'active', 'values' => 1]
+		]);
+		$this->assertEquals("(`name` = 'test' OR (`status` IS NULL AND `active` = 1))", $conditions->parse_query());
 	}
 
 	public function testNestedArraysWithoutRelation()
@@ -159,5 +170,12 @@ class ConditionsTest extends TestCase
 				['field' => 'active', 'values' => 1]
 			]
 		])->parse_query());
+
+		$conditions = Conditions::create([['field' => "name", 'values' => 'test']]);
+		$conditions->conditions([
+			['field' => 'status', 'operator' => ConditionOperation::ISNULL],
+			['field' => 'active', 'values' => 1]
+		]);
+		$this->assertEquals("(`name` = 'test' AND `status` IS NULL AND `active` = 1)", $conditions->parse_query());
 	}
 }
