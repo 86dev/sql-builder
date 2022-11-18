@@ -66,10 +66,12 @@ class ForeignKey extends Statements\Query
 	 *
 	 * @param string $type
 	 * @return ForeignKey
+	 *
+	 * @deprecated 1.1.8
 	 */
 	public function type($type)
 	{
-		$this->set_type($type);
+		// $this->set_type($type);
 		return $this;
 	}
 
