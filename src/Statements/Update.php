@@ -3,6 +3,7 @@
 namespace SQLBuilder\Statements;
 
 use SQLBuilder\Condition;
+use SQLBuilder\Join;
 
 /**
  * RENAME TABLE statement
