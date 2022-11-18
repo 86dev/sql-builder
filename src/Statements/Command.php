@@ -1,5 +1,7 @@
 <?php
 namespace SQLBuilder\Statements;
+use \SQLBuilder\Column;
+use \SQLBuilder\Index;
 
 /**
  * Command statement builder

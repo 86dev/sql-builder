@@ -13,14 +13,14 @@ trait SpatialTrait
 	/**
 	 * Indicate whether the value must be spatial
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_spatial;
 
 	/**
 	 * Indicate whether the value must be spatial
 	 *
-	 * @return \bool
+	 * @return bool
 	 */
 	public function get_spatial()
 	{
@@ -30,7 +30,7 @@ trait SpatialTrait
 	/**
 	 * Set whether the value must be spatial
 	 *
-	 * @param \bool $spatial
+	 * @param bool $spatial
 	 */
 	protected function set_spatial($spatial = true)
 	{

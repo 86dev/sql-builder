@@ -16,7 +16,7 @@ abstract class InsertBase extends Query
 
 	/**
 	 * Get insert ignore
-	 * @return \bool
+	 * @return bool
 	 */
 	public function get_ignore()
 	{
@@ -25,7 +25,7 @@ abstract class InsertBase extends Query
 
 	/**
 	 * Set whether the value must be ignored if an error occured
-	 * @param \bool $ignore
+	 * @param bool $ignore
 	 * @return InsertBase
 	 */
 	public function set_ignore($ignore = true)

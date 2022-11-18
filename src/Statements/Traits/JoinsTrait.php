@@ -13,14 +13,14 @@ trait JoinsTrait
 	/**
 	 * Joins
 	 *
-	 * @var \SQLBuilder\Join[]
+	 * @var \SQLBuilder\Join[][]
 	 */
 	protected $_joins;
 
 	/**
 	 * Get joins
 	 *
-	 * @return \SQLBuilder\Join[]
+	 * @return \SQLBuilder\Join[][]
 	 */
 	public function get_joins()
 	{

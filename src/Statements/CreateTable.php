@@ -64,9 +64,8 @@ class CreateTable extends Query
 	 * Add a column
 	 *
 	 * @param Column $column
-	 * @return CreateTable
 	 */
-	public function add_column(Column $column)
+	public function add_column(Column $column): self
 	{
 		$column->action(null);
 		$this->_columns[] = $column;
@@ -76,10 +75,9 @@ class CreateTable extends Query
 	/**
 	 * Add an index
 	 *
-	 * @param Query $index
-	 * @return CreateTable
+	 * @param Index|Primary|ForeignKey $index
 	 */
-	public function add_index(Query $index)
+	public function add_index($index): self
 	{
 		$index->action(null);
 		$index->table($this->_name);
@@ -91,9 +89,8 @@ class CreateTable extends Query
 	 * Table name
 	 *
 	 * @param string $name
-	 * @return CreateTable
 	 */
-	public function name($name)
+	public function name($name): self
 	{
 		$this->set_name($name);
 		return $this;
@@ -103,9 +100,8 @@ class CreateTable extends Query
 	 * Table charset
 	 *
 	 * @param string $charset
-	 * @return CreateTable
 	 */
-	public function charset($charset)
+	public function charset($charset): self
 	{
 		$this->set_charset($charset);
 		return $this;
@@ -115,9 +111,8 @@ class CreateTable extends Query
 	 * Table collate
 	 *
 	 * @param string $collate
-	 * @return CreateTable
 	 */
-	public function collate($collate)
+	public function collate($collate): self
 	{
 		$this->set_collate($collate);
 		return $this;
@@ -127,9 +122,8 @@ class CreateTable extends Query
 	 * Indicates if CREATE tABLE should abort if the table already exists
 	 *
 	 * @param boolean $ifnotexists
-	 * @return CreateTable
 	 */
-	public function ifnotexists($ifnotexists = true)
+	public function ifnotexists($ifnotexists = true): self
 	{
 		$this->set_ifnotexists($ifnotexists);
 		return $this;
@@ -141,9 +135,8 @@ class CreateTable extends Query
 	 * Add an index
 	 *
 	 * @param string ...$columns
-	 * @return Index
 	 */
-	public function index(...$columns)
+	public function index(...$columns): Index
 	{
 		$index = new Index($columns);
 		$this->add_index($index);
@@ -154,9 +147,8 @@ class CreateTable extends Query
 	 * Add a unique index
 	 *
 	 * @param string ...$columns
-	 * @return Index
 	 */
-	public function unique(...$columns)
+	public function unique(...$columns): Index
 	{
 		$index = new Index($columns);
 		$index->unique();
@@ -168,9 +160,8 @@ class CreateTable extends Query
 	 * Add a full text index
 	 *
 	 * @param string ...$columns
-	 * @return Index
 	 */
-	public function fulltext(...$columns)
+	public function fulltext(...$columns): Index
 	{
 		$index = new Index($columns);
 		$index->fulltext();
@@ -182,9 +173,8 @@ class CreateTable extends Query
 	 * Add a spatial index
 	 *
 	 * @param string ...$columns
-	 * @return Index
 	 */
-	public function spatial(...$columns)
+	public function spatial(...$columns): Index
 	{
 		$index = new Index($columns);
 		$index->spatial();
@@ -198,7 +188,7 @@ class CreateTable extends Query
 	 * @param string ...$columns
 	 * @return Primary
 	 */
-	public function primary(...$columns)
+	public function primary(...$columns): Primary
 	{
 		$index = new Primary($columns);
 		$this->add_index($index);
@@ -209,9 +199,8 @@ class CreateTable extends Query
 	 * Add a foreign key
 	 *
 	 * @param string ...$columns
-	 * @return ForeignKey
 	 */
-	public function foreign_key(...$columns)
+	public function foreign_key(...$columns): ForeignKey
 	{
 		$fk = new ForeignKey($columns);
 		$this->add_index($fk);
@@ -221,10 +210,8 @@ class CreateTable extends Query
 
 	/**
 	 * Reset the query
-	 *
-	 * @return CreateTable
 	 */
-	public function new_query()
+	public function new_query(): self
 	{
 		$this->new_query_charset();
 		$this->new_query_collate();
@@ -234,10 +221,8 @@ class CreateTable extends Query
 
 	/**
 	 * Get the query SQL
-	 *
-	 * @return string
 	 */
-	public function parse_query()
+	public function parse_query(): string
 	{
 		if (!$this->_name)
 			throw new \UnexpectedValueException("A name must be defined");
@@ -256,9 +241,8 @@ class CreateTable extends Query
 	 *
 	 * @param string $name Table name
 	 * @param bool $ifnotexists Create table only if it does not exist
-	 * @return CreateTable
 	 */
-	public static function create($name = null, $ifnotexists = false)
+	public static function create(string $name = null, bool $ifnotexists = false): self
 	{
 		return (new static())->name($name)->ifnotexists($ifnotexists);
 	}

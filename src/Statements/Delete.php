@@ -25,7 +25,7 @@ class Delete extends Query
 	#region Getters
 	/**
 	 * Get delete from
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_from()
 	{
@@ -34,7 +34,7 @@ class Delete extends Query
 
 	/**
 	 * Get delete using
-	 * @return \string[]
+	 * @return string[]
 	 */
 	public function get_using()
 	{
@@ -46,11 +46,10 @@ class Delete extends Query
 	/**
 	 * Add a join
 	 *
-	 * @param \SQLBuilder\Join $join
+	 * @param Join $join
 	 * @param string $table The table name or alias on which the join is applied. If not provided, the join will be associated with the latest table added via 'using'
-	 * @return Select
 	 */
-	public function join(Join $join, $table = null)
+	public function join(Join $join, $table = null): self
 	{
 		if (!$table) $table = $this->_last_using;
 		$this->add_join($join, $table);
@@ -61,9 +60,8 @@ class Delete extends Query
 	 * Table to delete from
 	 *
 	 * @param string ...$table_name_or_alias
-	 * @return Delete
 	 */
-	public function from(...$table_name_or_alias)
+	public function from(...$table_name_or_alias): self
 	{
 		$this->_from = $table_name_or_alias;
 		return $this;
@@ -74,9 +72,8 @@ class Delete extends Query
 	 *
 	 * @param string $table The table name
 	 * @param string $alias The table alias
-	 * @return Delete
 	 */
-	public function using($table, $alias = '')
+	public function using($table, $alias = ''): self
 	{
 		if (!$alias)
 			$alias = $table;
@@ -90,9 +87,8 @@ class Delete extends Query
 	 * Delete conditions
 	 *
 	 * @param string $conditions
-	 * @return Delete
 	 */
-	public function where($conditions)
+	public function where($conditions): self
 	{
 		$this->set_conditions($conditions);
 		return $this;
@@ -101,10 +97,8 @@ class Delete extends Query
 
 	/**
 	 * Reset the query
-	 *
-	 * @return Delete
 	 */
-	public function new_query()
+	public function new_query(): self
 	{
 		$this->new_query_conditions();
 		$this->new_query_join();
@@ -145,9 +139,8 @@ class Delete extends Query
 	 * Create a new DELETE statement
 	 *
 	 * @param string $from Table name to delete from
-	 * @return Delete
 	 */
-	public static function create($from = null)
+	public static function create($from = null): self
 	{
 		return (new static())->from($from);
 	}

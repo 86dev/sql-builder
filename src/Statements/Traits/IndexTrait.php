@@ -31,7 +31,7 @@ trait IndexTrait
 	/**
 	 * Set whether the value must be fulltext
 	 *
-	 * @param \bool $fulltext
+	 * @param bool $fulltext
 	 */
 	protected function set_fulltext($fulltext = true)
 	{
@@ -46,7 +46,7 @@ trait IndexTrait
 	/**
 	 * Set whether the value must be spatial
 	 *
-	 * @param \bool $spatial
+	 * @param bool $spatial
 	 */
 	protected function set_spatial($spatial = true)
 	{
@@ -61,7 +61,7 @@ trait IndexTrait
 	/**
 	 * Set whether the value must be unique
 	 *
-	 * @param \bool $unique
+	 * @param bool $unique
 	 */
 	protected function set_unique($unique = true)
 	{

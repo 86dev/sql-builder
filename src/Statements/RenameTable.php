@@ -19,7 +19,7 @@ class RenameTable extends Query
 	/**
 	 * Get table name(s)
 	 *
-	 * @return \string|\string[]
+	 * @return string|string[]
 	 */
 	public function get_name()
 	{
@@ -29,7 +29,7 @@ class RenameTable extends Query
 	/**
 	 * Get new table name(s)
 	 *
-	 * @return \string|\string[]
+	 * @return string|string[]
 	 */
 	public function get_new_name()
 	{
@@ -41,7 +41,7 @@ class RenameTable extends Query
 	/**
 	 * Set table name(s)
 	 *
-	 * @param \string|\string[] $name Original table(s) name(s)
+	 * @param string|string[] $name Original table(s) name(s)
 	 * @return RenameTable
 	 */
 	public function name($name)
@@ -53,7 +53,7 @@ class RenameTable extends Query
 	/**
 	 * Set new table name(s)
 	 *
-	 * @param \string|\string[] $name New table(s) name(s)
+	 * @param string|string[] $name New table(s) name(s)
 	 * @return RenameTable
 	 */
 	public function new_name($new_name)

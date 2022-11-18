@@ -13,14 +13,14 @@ trait IfNotExistsTrait
 	/**
 	 * Indicates if the query should stop if the element already exists
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_ifnotexists;
 
 	/**
 	 * Get if the query should stop if the element already exists
 	 *
-	 * @return \bool
+	 * @return bool
 	 */
 	public function get_ifnotexists()
 	{
@@ -30,7 +30,7 @@ trait IfNotExistsTrait
 	/**
 	 * Set if the query should stop if the element already exists
 	 *
-	 * @param \bool $ifnotexists
+	 * @param bool $ifnotexists
 	 */
 	protected function set_ifnotexists($ifnotexists = true)
 	{

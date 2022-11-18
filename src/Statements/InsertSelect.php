@@ -69,7 +69,7 @@ class InsertSelect extends InsertBase
 	/**
 	 * Set whether the value must be ignored if an error occured
 	 *
-	 * @param \bool $ignore
+	 * @param bool $ignore
 	 * @return InsertSelect
 	 */
 	public function ignore($ignore = true)

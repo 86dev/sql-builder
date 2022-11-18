@@ -15,10 +15,9 @@ class Conditions extends Query
 	/**
 	 * Set conditions
 	 *
-	 * @param \string[] $conditions
-	 * @return Conditions
+	 * @param string[] $conditions
 	 */
-	public function conditions($conditions)
+	public function conditions($conditions): self
 	{
 		$this->set_conditions($conditions);
 		return $this;
@@ -26,10 +25,8 @@ class Conditions extends Query
 
 	/**
 	 * Reste conditions query value
-	 *
-	 * @return Condition
 	 */
-	public function new_query()
+	public function new_query(): self
 	{
 		$this->new_query_conditions();
 		return $this;
@@ -37,10 +34,8 @@ class Conditions extends Query
 
 	/**
 	 * Get conditions query string
-	 *
-	 * @return string
 	 */
-	public function parse_query()
+	public function parse_query(): string
 	{
 		return $this->parse_query_conditions();
 	}
@@ -48,10 +43,9 @@ class Conditions extends Query
 	/**
 	 * Create a new condition
 	 *
-	 * @param \string[] $conditions
-	 * @return void
+	 * @param string[] $conditions
 	 */
-	public static function create($conditions = null)
+	public static function create($conditions = null): self
 	{
 		return (new static())->conditions($conditions);
 	}

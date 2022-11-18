@@ -12,14 +12,14 @@ trait CollateTrait
 {
 	/**
 	 * Collate
-	 * @var \string
+	 * @var string
 	 */
 	protected $_collate;
 
 	/**
 	 * Get collate
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_collate()
 	{
@@ -29,7 +29,7 @@ trait CollateTrait
 	/**
 	 * Set collate
 	 *
-	 * @param \string $collate
+	 * @param string $collate
 	 */
 	protected function set_collate($collate)
 	{

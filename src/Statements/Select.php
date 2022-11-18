@@ -30,14 +30,14 @@ class Select extends Query
 	/**
 	 * Distinct
 	 *
-	 * @var \bool
+	 * @var bool
 	 */
 	protected $_distinct;
 
 	/**
 	 * From
 	 *
-	 * @var \string[]
+	 * @var string[]
 	 */
 	protected $_from = [];
 
@@ -72,28 +72,28 @@ class Select extends Query
 	/**
 	 * Order by ['field' => 'ASC|DESC']
 	 *
-	 * @var \string[]
+	 * @var string[]
 	 */
 	protected $_orderby = [];
 
 	/**
 	 * Limit
 	 *
-	 * @var \int|null
+	 * @var int|null
 	 */
 	protected $_limit = '';
 
 	/**
 	 * Offset
 	 *
-	 * @var \int|null
+	 * @var int|null
 	 */
 	protected $_offset = null;
 
 	/**
 	 * SQL result
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	public $sql = '';
 	#endregion
@@ -122,7 +122,7 @@ class Select extends Query
 	/**
 	 * Get the query SQL
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function parse_query()
 	{
@@ -176,10 +176,10 @@ class Select extends Query
 	/**
 	 * Add a field to the query SELECT clause
 	 *
-	 * @param \string $field The field name
-	 * @param \string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
-	 * @param \string $alias The field alias
-	 * @param \boolean $group_by Also add this field to the query GROUP BY clause
+	 * @param string $field The field name
+	 * @param string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
+	 * @param string $alias The field alias
+	 * @param boolean $group_by Also add this field to the query GROUP BY clause
 	 * @return Select
 	 */
 	public function select($field, $table = '', $alias = '', $group_by = false, $do_not_use_backtick = false)
@@ -193,8 +193,8 @@ class Select extends Query
 	/**
 	 * Add a table to the query FROM clause
 	 *
-	 * @param \string $table The table name
-	 * @param \string $alias The table alias
+	 * @param string $table The table name
+	 * @param string $alias The table alias
 	 * @return Select
 	 */
 	public function from($table, $alias = '')
@@ -224,7 +224,7 @@ class Select extends Query
 	/**
 	 * Add conditions to the query WHERE clause
 	 *
-	 * @param \string|\string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
+	 * @param string|string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
 	 * @return Select
 	 */
 	public function where($conditions)
@@ -236,8 +236,8 @@ class Select extends Query
 	/**
 	 * Add field to the query GROUP BY clause
 	 *
-	 * @param \string $field The field name
-	 * @param \string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
+	 * @param string $field The field name
+	 * @param string $table The field's table name or alias (must be consistent with tables added in Select::from or Select::join)
 	 * @return Select
 	 */
 	public function groupby($field, $table = '', $do_not_use_backtick = false)
@@ -249,7 +249,7 @@ class Select extends Query
 	/**
 	 * Add conditions to the query HAVING clause
 	 *
-	 * @param \string|\string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
+	 * @param string|string[] $conditions A condition or an array of conditions. Each value should be either a string ("myField = 'a'") or an array of conditions (['relation' => Select::REL_AND, "aField = 'a'", "aField2 = 0"]. Each array should have a special value keyed 'relation' equals to Select::REL_AND or Select::REL_OR.
 	 * @return Select
 	 */
 	public function having($conditions)
@@ -261,8 +261,8 @@ class Select extends Query
 	/**
 	 * Add field to the query ORDER BY clause
 	 *
-	 * @param \string $field The field name or alias (must be consistent with fields added in Select::select)
-	 * @param \string $order Select::ORDER_ASC or Select::ORDER_DESC
+	 * @param string $field The field name or alias (must be consistent with fields added in Select::select)
+	 * @param string $order Select::ORDER_ASC or Select::ORDER_DESC
 	 * @return Select
 	 */
 	public function orderby($field, $order = Select::ORDER_ASC)
@@ -276,7 +276,7 @@ class Select extends Query
 	/**
 	 * Set the query LIMIT clause
 	 *
-	 * @param \int|null $limit The number of items to include
+	 * @param int|null $limit The number of items to include
 	 * @return Select
 	 */
 	public function limit($limit)
@@ -288,7 +288,7 @@ class Select extends Query
 	/**
 	 * Set the query OFFSET clause
 	 *
-	 * @param \int|null $offset The number of items to ignore
+	 * @param int|null $offset The number of items to ignore
 	 * @return Select
 	 */
 	public function offset($offset)

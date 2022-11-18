@@ -16,10 +16,9 @@ class DropTable extends Query
 	/**
 	 * Set table name
 	 *
-	 * @param \string $table
-	 * @return DropTable
+	 * @param string $table
 	 */
-	public function table($table)
+	public function table($table): self
 	{
 		$this->set_table($table);
 		return $this;
@@ -28,10 +27,9 @@ class DropTable extends Query
 	/**
 	 * Set if the query should stop if the element does not exist
 	 *
-	 * @param \bool $ifexists
-	 * @return DropTable
+	 * @param bool $ifexists
 	 */
-	public function ifexists($ifexists = true)
+	public function ifexists($ifexists = true): self
 	{
 		$this->set_ifnotexists($ifexists);
 		return $this;
@@ -39,19 +37,18 @@ class DropTable extends Query
 
 	/**
 	 * Reset the query
-	 *
-	 * @return DropTable
 	 */
-	public function new_query()
+	public function new_query(): self
 	{
 		$this->new_query_table();
 		$this->new_query_ifnotexists();
+		return $this;
 	}
 
 	/**
 	 * Get the query string
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function parse_query()
 	{
@@ -65,9 +62,8 @@ class DropTable extends Query
 	 *
 	 * @param string $table Table name
 	 * @param boolean $ifexists Delete the table only if it exists
-	 * @return CreateTable
 	 */
-	public static function create($table, $ifexists = false)
+	public static function create($table, $ifexists = false): self
 	{
 		return (new static())->table($table)->ifexists($ifexists);
 	}

@@ -15,10 +15,10 @@ class Fields extends Query
 	/**
 	 * Add a field to the query
 	 *
-	 * @param \string $field The field name
-	 * @param \string $table The field's table name or alias (must be consistent with tables specified in the query)
-	 * @param \string $alias The field alias
-	 * @param \bool $do_not_use_backtick Specifies that the query builder should not surround this field with backtick. Usefull for functions field like 'COUNT(*)'. If true, you should prepare the field yourself by calling SQL::backtick on the function arguments who need it.
+	 * @param string $field The field name
+	 * @param string $table The field's table name or alias (must be consistent with tables specified in the query)
+	 * @param string $alias The field alias
+	 * @param bool $do_not_use_backtick Specifies that the query builder should not surround this field with backtick. Usefull for functions field like 'COUNT(*)'. If true, you should prepare the field yourself by calling SQL::backtick on the function arguments who need it.
 	 * @return Fields
 	 */
 	public function field($field, $table = '', $alias = '', $do_not_use_backtick = false)

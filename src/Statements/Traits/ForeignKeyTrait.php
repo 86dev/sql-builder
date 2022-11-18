@@ -16,28 +16,28 @@ trait ForeignKeyTrait
 	/**
 	 * Foreign key references table
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_on;
 
 	/**
 	 * Foreign key references columns
 	 *
-	 * @var \string|\string[]
+	 * @var string|string[]
 	 */
 	protected $_references;
 
 	/**
 	 * Foreign key references delete action, see ForeignKeyAction for available values
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_delete;
 
 	/**
 	 * Foreign key references update action, see ForeignKeyAction for available values
 	 *
-	 * @var \string
+	 * @var string
 	 */
 	protected $_update;
 
@@ -53,7 +53,7 @@ trait ForeignKeyTrait
 	/**
 	 * Get index references table
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_on()
 	{
@@ -63,7 +63,7 @@ trait ForeignKeyTrait
 	/**
 	 * Get index references columns
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_references()
 	{
@@ -73,7 +73,7 @@ trait ForeignKeyTrait
 	/**
 	 * Get index delete
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_delete()
 	{
@@ -83,7 +83,7 @@ trait ForeignKeyTrait
 	/**
 	 * Get index update
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_update()
 	{
@@ -93,7 +93,7 @@ trait ForeignKeyTrait
 	/**
 	 * Get index match
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function get_match()
 	{
@@ -105,7 +105,7 @@ trait ForeignKeyTrait
 	/**
 	 * Set foreign key references table
 	 *
-	 * @param \string $on
+	 * @param string $on
 	 */
 	protected function set_on($on)
 	{
@@ -115,7 +115,7 @@ trait ForeignKeyTrait
 	/**
 	 * Set foreign key references columns
 	 *
-	 * @param \string[] $references
+	 * @param string[] $references
 	 */
 	protected function set_references(...$references)
 	{
@@ -125,7 +125,7 @@ trait ForeignKeyTrait
 	/**
 	 * Set foreign key references delete action, see ForeignKeyAction for available values
 	 *
-	 * @param \string $delete
+	 * @param string $delete
 	 * @throws \UnexpectedValueException
 	 */
 	protected function set_delete($delete)
@@ -138,7 +138,7 @@ trait ForeignKeyTrait
 	/**
 	 * Set foreign key references update action, see ForeignKeyAction for available values
 	 *
-	 * @param \string $update
+	 * @param string $update
 	 * @throws \UnexpectedValueException
 	 */
 	protected function set_update($update)
@@ -151,7 +151,7 @@ trait ForeignKeyTrait
 	/**
 	 * Set foreign key match, see ForeignKeyMatch for available values
 	 *
-	 * @param \string $match
+	 * @param string $match
 	 * @throws \UnexpectedValueException
 	 */
 	protected function set_match($match)

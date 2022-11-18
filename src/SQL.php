@@ -2,6 +2,10 @@
 namespace SQLBuilder;
 
 use SQLBuilder\Enums\SQLAction;
+use SQLBuilder\Statements\AlterTable;
+use SQLBuilder\Statements\CreateTable;
+use SQLBuilder\Statements\DropTable;
+use SQLBuilder\Statements\IndexCommand;
 
 /**
  * SQL helper functions.
@@ -14,8 +18,8 @@ abstract class SQL
 	/**
 	 * Surround a name with bactick.
 	 * If name contains a table name or alias (eg: 'a.name'), the table and name will be surrounded by backticks.
-	 * @param \string $name
-	 * @return \string
+	 * @param string $name
+	 * @return string
 	 */
 	public static function backtick($field)
 	{
@@ -25,8 +29,8 @@ abstract class SQL
 
 	/**
 	 * Surround a value with quote and add slashes
-	 * @param \string $value
-	 * @return \string
+	 * @param string $value
+	 * @return string
 	 */
 	public static function quote($value)
 	{
@@ -39,22 +43,20 @@ abstract class SQL
 	 *
 	 * @param string $table
 	 * @param boolean $ifnotexists Create the table only if it does not exist
-	 * @return Statements\CreateTable
 	 */
-	public static function create_table($table, $ifnotexists = false)
+	public static function create_table($table, $ifnotexists = false): CreateTable
 	{
-		return Statements\CreateTable::create($table, $ifnotexists);
+		return CreateTable::create($table, $ifnotexists);
 	}
 
 	/**
 	 * Build a ALTER TABLE query
 	 *
 	 * @param string $table
-	 * @return Statements\AlterTable
 	 */
-	public static function alter_table($table)
+	public static function alter_table($table): AlterTable
 	{
-		return Statements\AlterTable::create($table);
+		return AlterTable::create($table);
 	}
 
 	/**
@@ -62,11 +64,10 @@ abstract class SQL
 	 *
 	 * @param string $table Table name
 	 * @param boolean $ifexists Delete the table only if it exists
-	 * @return Statements\DropTable
 	 */
-	public static function drop_table($table, $ifexists = false)
+	public static function drop_table($table, $ifexists = false): DropTable
 	{
-		return Statements\DropTable::create($table, $ifexists);
+		return DropTable::create($table, $ifexists);
 	}
 
 	/**
@@ -75,10 +76,11 @@ abstract class SQL
 	 * @param string $name
 	 * @param string $table
 	 * @return Statements\IndexCommand
+	 * @deprecated 1.1.8
 	 */
 	public static function drop_index($name, $table)
 	{
-		return Statements\IndexCommand::create()->action(SQLAction::DROP)->name($name)->table($table);
+		// return Statements\IndexCommand::create()->action(SQLAction::DROP)->name($name)->table($table);
 	}
 
 	/**
