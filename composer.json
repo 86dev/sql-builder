@@ -18,13 +18,6 @@
     "require-dev": {
         "phpunit/phpunit": "^5.6"
     },
-	"repositories": [
-		{
-			"type": "git",
-			"url": "https://86dev-jt.visualstudio.com/_git/PHPTools",
-			"reference": "86dev/php-tools"
-		}
-	],
 	"autoload": {
 		"psr-4": {
 			"SQLBuilder\\": "src/"
